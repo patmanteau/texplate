@@ -1,0 +1,1 @@
+Eine einfache LaTeX-Vorlage zum Einsatz mit xelatex.

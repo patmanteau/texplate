@@ -1,7 +1,7 @@
 %% KOMA Script -- Klasse laden
 %% Schriftgröße 12, keine Bindekorrektur, Titelei ausgeben, Rand einstellen, Seitengröße einstellen,
 %% kleine Überschriften, Ausgabe in DIN A4 
-\documentclass[fontsize=12, BCOR=0mm, titlepage=true, DIV=12, pagesize=auto, headings=small, a4paper]{scrartcl}
+\documentclass[fontsize=11, BCOR=0mm, titlepage=true, DIV=10, pagesize=auto, headings=small, a4paper]{scrartcl}
 \usepackage{scrpage2}
 \pagestyle{scrplain}
 
@@ -12,6 +12,9 @@
 \usepackage{xunicode}
 \usepackage{fontspec}
 \usepackage{xltxtra}
+
+%% Erweiterte Farbdefinitionen
+\usepackage{xcolor}
 
 %% Schriftsetup
 %% Serifenschrift...
@@ -35,11 +38,42 @@
 %% Alle 5 Zeilen nummerieren
 % \modulolinenumbers[5]
 
+%% PDF-spezifische Optionen -> Grafiken und Hyperlinks im PDF
+\usepackage{ifpdf}
+\ifpdf 
+    \usepackage[pdftex]{graphicx}
+    \usepackage{hyperref}    
+    \hypersetup{
+      pdftitle    = {TeXplate},
+      pdfsubject  = {TODO},
+      pdfauthor   = {TODOer}
+    }
+\else 
+    \usepackage{graphicx}
+    \usepackage{hyperref}    
+    \hypersetup{
+      pdftitle    = {TeXplate},
+      pdfsubject  = {TODO},
+      pdfauthor   = {TODOer}
+    }
+\fi
+
 %% Bibliographie einrichten
 %% Zu den Optionen: s. Biblatex-Dokumentation
-\usepackage[bibstyle=authoryear, citestyle=authoryear-ibid, ibidpage=true, isbn=false, autocite=footnote, backend=biber]{biblatex}
+\usepackage[
+    bibstyle=authoryear,
+    citestyle=authoryear,
+    isbn=false,
+    autocite=inline,
+    hyperref=true,
+    backend=biber
+]{biblatex}
 %% Einbinden der Bibliographiedatei aus Mendeley, Zotero, etc...
 \addbibresource{library.bib}
+
+%% Einbinden des listings-Pakets für Quelltextformatierung
+\usepackage{listings}
+\colorlet{light-gray}{gray!20}
 
 %% acronym für das Abkürzungsverzeichnis benutzen
 \usepackage[printonlyused]{acronym}
@@ -62,20 +96,6 @@
 %% Default ist 1,5facher Zeilenabstand
 \usepackage[onehalfspacing]{setspace}
 
-%% PDF-spezifische Optionen -> Grafiken und Hyperlinks im PDF
-\usepackage{ifpdf}
-\ifpdf 
-    \usepackage[pdftex]{graphicx}
-    \usepackage{hyperref}    
-    \hypersetup{
-      pdftitle    = {TeXplate},
-      pdfsubject  = {TODO},
-      pdfauthor   = {TODOer}
-    }
-\else 
-    \usepackage{graphicx}
-\fi
-
 %% Floatende Grafiken etc erst nach ihrer ersten Referenzierung im Text anzeigen, siehe auch
 %% http://stackoverflow.com/questions/547508/in-latex-is-there-a-way-to-put-a-float-automatically-after-where-it-is-first-re
 \usepackage{flafter}
@@ -95,26 +115,16 @@
 %% Römische Ziffern beim Vorspiel... (Titel, Inhaltsverzeichnis etc.)
 \pagenumbering{Roman}
 
-%% Titelseite klarmachen
-%% einfacher Zeilenabstand AN
-\singlespacing
-\titlehead{{\Large Institut~kurz
-\hfill SoSe~2013\\}
-Institut~lang\\
-Musterstr.~6\\
-99999 Mustertown}
-\subject{Thema}
-\title{Titel}
-\subtitle{Untertitel}
-\author{TODOer}
-\date{14. Juli 2013}
-\publishers{Betreut durch}
-
+%% Titelseite definieren
+\input{TeXplate_Deckblatt.tex}
 %% Titelseite ausgeben
 \maketitle
 
-%% Inhaltsverzeichnis ausgeben
-\tableofcontents
+%% Inhaltsverzeichnis ausgeben (mit einfachem Zeilenabstand)
+\begin{singlespace}
+    \tableofcontents
+\end{singlespace}
+
 %% 1,5facher Zeilenabstand für den Textkörper
 \onehalfspacing
 %% neue Seite,... (s. http://texwelt.de/wissen/fragen/18/was-ist-der-unterschied-zwischen-newpage-pagebreak-und-clearpage)

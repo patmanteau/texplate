@@ -18,13 +18,13 @@ Das \acr{OSI}-Modell wurde ab 1978 als Reaktion auf den wachsenden Gebrauch von 
 \item Die Sicherungsschicht (\textit{data-link layer}) beinhaltet Mittel, um Daten zwischen Netzwerkteilnehmern zu übertragen und dabei auftretetende physische Übertragungsfehler zu korrigieren.
 \item Die Bitübertragungsschicht (\textit{physical layer}) spezifiziert mechanische und elektrische Standards zum Zugriff auf das physische Medium.
 \end{itemize}
-\begin{figure}[tp]
-    \centering
-    \includegraphics[width=0.9\textwidth]{osi-modell.pdf}\linebreak
-    In Anlehnung an \textcite[42]{Tanenbaum2010}.
-    \caption{Das OSI-Referenzmodell.}
-    \label{grafik:osi-modell}
-\end{figure}
+%\begin{figure}[tp]
+%    \centering
+%    \includegraphics[width=0.9\textwidth]{osi-modell.pdf}\linebreak
+%    In Anlehnung an \textcite[42]{Tanenbaum2010}.
+%    \caption{Das OSI-Referenzmodell.}
+%    \label{grafik:osi-modell}
+%\end{figure}
 \subsection{TCP/IP-Referenzmodell}\label{sec:TCP/IP}
 Die im heutigen Internet weit verbreitete Protokollfamilie \acr{TCP/IP} wird in ein vierteiliges Schichtenmodell untergliedert (s. Abb. \ref{grafik:tcpip-modell}) \autocite[Vgl.][46]{Tanenbaum2010}. Gegenüber dem \acr{OSI}-Modell fasst \citeauthor{Holtkamp2002} die Funktionalitäten wie folgt zusammen \autocite[Vgl.][12\psq]{Holtkamp2002}:
 \begin{itemize}
@@ -34,26 +34,26 @@ Die im heutigen Internet weit verbreitete Protokollfamilie \acr{TCP/IP} wird in 
 \item Netzwerkschicht (\textit{network layer}): Entspricht den Schichten 1 und 2 des \acr{OSI}-Modells. \acr{TCP/IP} verfügt über keine eigenen Protokolle auf dieser Schicht und nutzt statt dessen bestehende Technologien, wie beispielsweise Ethernet.
 \end{itemize}
 
-\begin{figure}[tp]
-    \centering
-    \includegraphics[width=0.8\textwidth]{tcpip-modell.pdf}\linebreak
-    In Anlehnung an \textcite[46]{Tanenbaum2010}.
-    \caption{Das TCP/IP-Referenzmodell.}
-    \label{grafik:tcpip-modell}
-\end{figure}
+%\begin{figure}[tp]
+%    \centering
+%    \includegraphics[width=0.8\textwidth]{tcpip-modell.pdf}\linebreak
+%    In Anlehnung an \textcite[46]{Tanenbaum2010}.
+%    \caption{Das TCP/IP-Referenzmodell.}
+%    \label{grafik:tcpip-modell}
+%\end{figure}
 \subsection{Architektur des Internet} \label{sec:IP}
 Das Internet kann auf Schicht 3 des \acr{OSI}-Modells als dezentrale Zusammenschaltung einzelner Netzwerke oder Autonomer Systeme verstanden werden \autocite[Vgl.][437]{Tanenbaum2010}. Daraus folgt, dass Start- und Endpunkt einer Kommunikation nicht unbedingt im selben Netzwerk liegen müssen, und dass es mehr als einen einzelnen Pfad vom Start zum Ziel geben kann. Das \acr{IP}-Protokoll wurde von Beginn an für diese Struktur entworfen \autocite[Vgl.][438]{Tanenbaum2010}. Seine Aufgabe ist es, einzelne Datenpakete vom Ursprungs- zum Zielort zu transportieren (nach dem \textit{best-effort-Prinzip}, d.h. ohne dabei die Ankunft zu garantieren), unabhängig von der Anzahl einzelner Netzwerke, die zwischen Ursprung und Ziel liegen \autocite[Vgl.][438]{Tanenbaum2010}. Um dies zu ermöglichen, werden die einzelnen Netzwerke über Router miteinander verbunden, deren Funktion es in diesem Kontext ist, anhand einer Adresstabelle ein ankommendes Paket entweder an einen weiteren Router bzw. zuletzt an das Zielsystem weiterzuleiten, oder aber das Paket zu verwerfen \autocite[Vgl.][342]{Tanenbaum2010}.
 
 \subsection{Internet Protocol Version 4}
 Das im Internet verbreitetste Vermittlungsprotokoll ist \acr{IPv4}. Es handelt sich dabei um ein paketvermitteltes Protokoll, dessen kleinste Einheit das so genannte \textit{Datagramm} ist. Ein \acr{IPv4}-Datagramm besteht aus \textit{Header} und \textit{Nutzlast}. Der Header besteht aus einem 20 Byte großen Teil konstanter Länge sowie einem optionalen Teil variabler Länge \autocite[439]{Tanenbaum2010}. Die in Abb. \ref{grafik:ipv4-header} hervorgehobenen Felder des Headers sollen hier kurz erklärt werden, da sie zum Verständnis späterer Ausführungen hilfreich sind.
 Die Felder \textit{Identification}, \textit{MF} und \textit{Fragment offset} dienen der Erkennung und Rekonstruktion fragmentierter \acr{IP}-Pakete. Fragmentierung tritt beispielsweise auf, wenn ein 1600 Byte großes Paket auf seinem Weg durch das Internet eine Route passiert, die maximal 1500 Byte pro Paket übertragen kann. In diesem Fall wird das Paket in zwei Pakete passender Größe aufgeteilt, die Headerdaten entsprechend gesetzt und die beiden entstehenden Pakete auf ihren weiteren Weg geschickt. Der empfangende Host nutzt seinerseits die drei Felder im Header, um die Fragmente richtig zuzuordnen und in die richtige Reihenfolge zu bringen. Das Feld \textit{Time to live} enthält die maximale Anzahl von Routern, die ein Paket zwischen Start und Ziel passieren darf. Jeder Router dekrementiert das Feld, bevor er das Paket weiterleitet. Erreicht der Wert des Feldes Null, wird das Paket verworfen. Dies dient der Robustheit des gesamten Netzes. Gelangen Pakete aufgrund äußerer Umstände in eine Routingschleife, werden sie dennoch nicht beliebig oft weitergeleitet. Die beiden Felder \textit{Source address} und \textit{Destination address} enthalten die Quell- und Zieladresse des Pakets.
-\begin{figure}[tp]
-    \centering
-    \includegraphics[width=1\textwidth]{ipv4-header.pdf}\linebreak
-    In Anlehnung an \textcite[439]{Tanenbaum2010}.
-    \caption{Der \acr{IPv4}-Header.}
-    \label{grafik:ipv4-header}
-\end{figure}
+%\begin{figure}[tp]
+%    \centering
+%    \includegraphics[width=1\textwidth]{ipv4-header.pdf}\linebreak
+%    In Anlehnung an \textcite[439]{Tanenbaum2010}.
+%    \caption{Der \acr{IPv4}-Header.}
+%    \label{grafik:ipv4-header}
+%\end{figure}
 \subsection{Transmisson Control Protocol}
 Das \acr{TCP} wurde gezielt entworfen, um eine zuverlässige Ende-zu-Ende-Übertragung von Byteströmen über eine prinzipbedingt unzuverlässige Zusammenschaltung einzelner Netzwerke zu ermöglichen \autocite[Vgl.][552]{Tanenbaum2010}. Die TCP-Protokollimplementierung des sendenden Hosts nimmt dazu Daten als Streams entgegen, teilt diese in maximal 64 KB große Stücke auf und sendet jedes dieser Stücke als einzelnes \acr{IP}-Datagramm \autocite[Vgl.][552]{Tanenbaum2010}. Sobald TCP-Datagramme auf dem Zielhost eingehen, werden die Stücke in der richtigen Reihenfolge zusammengesetzt und dem verarbeitenden Prozess zur Verfügung gestellt \autocite[Vgl.][552]{Tanenbaum2010}. Da das \acr{IP}-Protokoll im Gegensatz zu \acr{TCP} keine Garantien bezüglich der Zustellung einzelner Pakete gibt, ist es Aufgabe des \acr{TCP}-Protokolls, den Verlust einzelner Pakete zu erkennen und zu beheben bzw., falls dies nicht möglich ist, eine entsprechende Fehlermeldung bereitzustellen.
 \acr{TCP} fügt \acr{IP}-Adressen einen weiteren Adressmechanismus hinzu -- die so genannten \textit{Ports}, welche durch eine 2 Byte breite Zahl mit einem Wertebereich von 0 bis 65535 dargestellt werden. Die Kombination aus \acr{IP}-Adresse und Port ergibt den Endpunkt einer TCP-Verbindung auf beiden Seiten. Ein TCP-\textit{Segment} besteht analog zum \acr{IP}-\textit{Datagramm} aus einem Header sowie der Nutzlast. TCP-Header bestehen aus einem 20 Byte großen Teil fester Größe sowie einem variablen Teil \autocite[Vgl.][556]{Tanenbaum2010}.

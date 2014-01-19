@@ -82,13 +82,24 @@
 \makeatletter
 \newcommand{\acr}{\protect\@acr}%
 \newcommand{\@acr}[1]{%
-    \expandafter\ifx\csname ac@#1\endcsname\AC@used
+    \expandafter\ifx\csname ac@#1\endcsname\AC@used%
         \acs{#1}%
     \else
         \acs{#1} (\acl{#1})%
-        \global\expandafter\let\csname ac@#1\endcsname\AC@used
+        \global\expandafter\let\csname ac@#1\endcsname\AC@used%
         \AC@addtoAC@clearlist{#1}%
-        \AC@logged{#1}
+        \AC@logged{#1}%
+    \fi
+}
+\newcommand{\acrp}{\protect\@acrp}%
+\newcommand{\@acrp}[1]{%
+    \expandafter\ifx\csname ac@#1\endcsname\AC@used%
+        \acs{#1}%
+    \else
+        \acs{#1} (\aclp{#1})%
+        \global\expandafter\let\csname ac@#1\endcsname\AC@used%
+        \AC@addtoAC@clearlist{#1}%
+        \AC@logged{#1}%
     \fi
 }
 \makeatother

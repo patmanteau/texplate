@@ -1,0 +1,32 @@
+% Copyright (c) Patrick Haas. All rights reserved.
+%
+% Licensed under the BSD license. See LICENSE.txt
+% in the project root for license information.
+
+%% Vorabversion ein/aus
+\settoggle{final_version}{false}
+
+%% Geometry-Paket oder typearea für Satzspiegel verwenden
+\settoggle{TG_use_geometry}{true}
+
+%% Pandoc-Anpassungen ein/aus
+\settoggle{use_pandoc}{true}
+
+%% Titel der Arbeit
+\newcommand{\texplatetitle}{Analyse und Visualisierung von Beziehungen zwischen Musikern auf der Grundlage von Musik-Metadaten unter Anwendung von Methoden der sozialen Netzwerkanalyse\xspace}
+%% Titel der Arbeit
+\newcommand{\texplatesubtitle}{\xspace}
+%% Subjekt der Arbeit
+\newcommand{\texplatesubject}{Bachelor~Thesis zur Erlangung des Grads eines \textit{Bachelor~of~Science}\xspace}
+%% Autor(en)
+\newcommand{\texplateauthor}{Patrick~Haas\xspace}
+%% Betreuer(en)
+\newcommand{\texplatesupervisor}{Prof.~Dr.~Marcel~Endejan\xspace}
+
+\iftoggle{TG_use_geometry}{
+    %% Seitenränder für geometry-Paket
+    \newcommand{\texplatemarginleft}{4cm}
+    \newcommand{\texplatemarginright}{2cm}
+    \newcommand{\texplatemargintop}{3cm}
+    \newcommand{\texplatemarginbottom}{2.5cm}
+}

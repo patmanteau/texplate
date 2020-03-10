@@ -1,0 +1,113 @@
+% Copyright (c) Patrick Haas. All rights reserved.
+%
+% Licensed under the BSD license. See LICENSE.txt
+% in the project root for license information.
+
+\SetTracking[
+    spacing = {45*,,},
+    outer spacing = {30*,,}
+]{
+    encoding= *,
+    shape = sc
+}{10}
+
+\SetTracking[
+    context = allcaps,
+    spacing = {400*,,},
+    outer spacing = {300*,,}
+]{
+    encoding = *
+}{50}
+
+% Serifenschrift...
+\setmainfont{Minion Pro}[
+    Ligatures={Common,TeX},
+    %Scale=0.94, % 0.94 makes it about Times New Roman size
+    Numbers={Lowercase,Proportional},
+    % Contextuals={Alternate},
+    UprightFeatures={
+        SizeFeatures={ 
+            {Size={-8.5},Font=MinionPro-Capt},
+            {Size={8.5-13},Font=MinionPro-Regular},
+            {Size={13-20},Font=MinionPro-Subh},
+            {Size={20-},Font=MinionPro-Disp}
+        },
+    },
+    BoldFeatures={
+        SizeFeatures={ 
+            {Size={-8.5},Font=MinionPro-BoldCapt},
+            {Size={8.5-13},Font=MinionPro-Bold},
+            {Size={13-20},Font=MinionPro-BoldSubh},
+            {Size={20-},Font=MinionPro-BoldDisp}
+        },
+    },
+    ItalicFeatures={
+        SizeFeatures={ 
+            {Size={-8.5},Font=MinionPro-ItCapt},
+            {Size={8.5-13},Font=MinionPro-It},
+            {Size={13-20},Font=MinionPro-ItSubh},
+            {Size={20-},Font=MinionPro-ItDisp}
+            },
+    },
+    BoldItalicFeatures={
+        SizeFeatures={ 
+            {Size={-8.5},Font=MinionPro-BoldItCapt},
+            {Size={8.5-13},Font=MinionPro-BoldIt},
+            {Size={13-20},Font=MinionPro-BoldItSubh},
+            {Size={20-},Font=MinionPro-BoldItDisp}
+        },
+    },
+]
+
+% Serifenlose...
+\setsansfont{Myriad Pro}[
+    Ligatures={Common, TeX},
+    %Scale=0.94,
+    Numbers={Lowercase,Proportional},
+    % Contextuals={Alternate},
+    UprightFeatures={
+        SizeFeatures={ 
+            {Size={-10.5},Font=MyriadPro-SemiExt},
+            {Size={10.5-},Font=MyriadPro-Regular},
+        },
+    },
+    BoldFeatures={
+        SizeFeatures={ 
+            {Size={-10.5},Font=MyriadPro-BoldSemiExt},
+            {Size={10.5-},Font=MyriadPro-Bold},
+        },
+    },
+    ItalicFeatures={
+        SizeFeatures={ 
+            {Size={-10.5},Font=MyriadPro-SemiExtIt},
+            {Size={10.5-},Font=MyriadPro-It},
+        },
+    },
+    BoldItalicFeatures={
+        SizeFeatures={ 
+            {Size={-10.5},Font=MyriadPro-BoldSemiExtIt},
+            {Size={10.5-},Font=MyriadPro-BoldIt},
+        },
+    },
+]
+
+% Nichtproportionale Schrift...
+\setmonofont{Iosevka}[Scale=MatchLowercase]
+
+% Matheschrift
+\setmathfont{libertinusmath}[
+    Ligatures=TeX,
+    Scale=MatchLowercase
+]
+
+\setmathfontface\mathoper{libertinusmath}[
+    Ligatures=TeX,
+    Scale=0.94
+]
+
+\setoperatorfont\mathoper
+
+%% Fancy Schauschrift
+\newfontface\fancyheadline{MyriadPro-SemiboldSemiCn}[
+    Ligatures=TeX
+]

@@ -1,0 +1,61 @@
+% Copyright (c) Patrick Haas. All rights reserved.
+%
+% Licensed under the BSD license. See LICENSE.txt
+% in the project root for license information.
+
+\SetTracking[
+    spacing = {45*,,},
+    outer spacing = {30*,,}
+]{
+    encoding= *,
+    shape = sc
+}{10}
+
+\SetTracking[
+    context = allcaps,
+    spacing = {400*,,},
+    outer spacing = {300*,,}
+]{
+    encoding = *
+}{50}
+
+% Serifenschrift...
+\setmainfont{ScalaPro}[
+    Ligatures={Common,TeX},
+    Scale=0.94, % 0.94 makes it about Times New Roman size
+    Numbers={OldStyle},
+    BoldFont=ScalaPro-Bold,
+    ItalicFont=ScalaPro-Ita,
+    BoldItalicFont=ScalaPro-BoldIta,
+]
+
+% Serifenlose...
+\setsansfont{ScalaSansPro-Regular}[
+    Ligatures={Common, TeX},
+    Scale=0.94,
+    BoldFont=ScalaSansPro-Bold,
+    ItalicFont=ScalaSansPro-Italic,
+    BoldItalicFont=ScalaSansPro-BoldItalic,
+    Numbers={OldStyle},
+    Contextuals={Alternate}
+]
+
+% Nichtproportionale Schrift...
+\setmonofont{Iosevka}[Scale=MatchLowercase]
+
+% Matheschrift
+\setmathfont{Cambria Math}[
+    Ligatures=TeX,
+    Scale=MatchLowercase
+]
+
+\setmathfontface\mathoper{Cambria Math}[
+    Ligatures=TeX,
+    Scale=MatchLowercase
+]
+\setoperatorfont\mathoper
+
+%% Fancy Schauschrift
+\newfontface\fancyheadline{ScalaSansPro-Black}[
+    Ligatures=TeX
+]

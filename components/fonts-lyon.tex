@@ -1,0 +1,62 @@
+% Copyright (c) Patrick Haas. All rights reserved.
+%
+% Licensed under the BSD license. See LICENSE.txt
+% in the project root for license information.
+
+\SetTracking[
+    spacing = {45*,,},
+    outer spacing = {30*,,}
+]{
+    encoding= *,
+    shape = sc
+}{10}
+
+\SetTracking[
+    context = allcaps,
+    spacing = {400*,,},
+    outer spacing = {300*,,}
+]{
+    encoding = *
+}{50}
+
+% Serifenschrift...
+\setmainfont{Lyon Text Regular}[
+    Ligatures={Common,TeX},
+    Scale=0.94, % 0.94 makes it about Times New Roman size
+    Numbers={OldStyle},
+    BoldFont=Lyon Text Semibold,
+    ItalicFont=Lyon Text Regular Italic,
+    BoldItalicFont=Lyon Text Semibold Italic,
+]
+
+% Serifenlose...
+\setsansfont{ScalaSansPro-Regular}[
+    Ligatures={Common, TeX},
+    Scale=0.94,
+    BoldFont=ScalaSansPro-Bold,
+    ItalicFont=ScalaSansPro-Italic,
+    BoldItalicFont=ScalaSansPro-BoldItalic,
+    Numbers={OldStyle},
+    Contextuals={Alternate}
+]
+
+% Nichtproportionale Schrift...
+\setmonofont{Iosevka}[Scale=MatchLowercase]
+
+% Matheschrift
+\setmathfont{TeX Gyre Termes Math}[
+    Ligatures=TeX,
+    Scale=MatchLowercase
+]
+
+\setmathfontface\mathoper{TeX Gyre Termes Math}[
+    Ligatures=TeX,
+    Scale=MatchLowercase
+]
+
+\setoperatorfont\mathoper
+
+%% Fancy Schauschrift
+\newfontface\fancyheadline{Lyon Display Medium}[
+    Ligatures=TeX
+]

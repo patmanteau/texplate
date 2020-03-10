@@ -1,0 +1,52 @@
+% Copyright (c) Patrick Haas. All rights reserved.
+%
+% Licensed under the BSD license. See LICENSE.txt
+% in the project root for license information.
+
+\SetTracking[
+    spacing = {45*,,},
+    outer spacing = {30*,,}
+]{
+    encoding= *,
+    shape = sc
+}{10}
+
+\SetTracking[
+    context = allcaps,
+    spacing = {400*,,},
+    outer spacing = {300*,,}
+]{
+    encoding = *
+}{50}
+
+% Serifenschrift...
+\setmainfont{TeX Gyre Termes}[
+    Ligatures={Common,TeX},
+    % Scale=1, % 1 makes it about Times New Roman size
+    Numbers={OldStyle}
+]
+
+% Serifenlose...
+\setsansfont{TeX Gyre Heros}[
+    Ligatures={Common, TeX},
+    % Scale=0.94,
+    Numbers={OldStyle}
+]
+
+% Nichtproportionale Schrift...
+\setmonofont{TeX Gyre Cursor}[Scale=MatchLowercase]
+
+% Matheschrift
+\setmathfont{TeX Gyre Termes Math}[
+    Ligatures=TeX
+]
+
+\setmathfontface\mathoper{TeX Gyre Termes Math}[
+    Ligatures=TeX
+]
+\setoperatorfont\mathoper
+
+% Fancy Schauschrift
+\newfontface\fancyheadline{TeX Gyre Heros Bold}[
+    Ligatures=TeX
+]

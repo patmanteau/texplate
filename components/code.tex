@@ -1,0 +1,111 @@
+% Copyright (c) Patrick Haas. All rights reserved.
+%
+% Licensed under the BSD license. See LICENSE.txt
+% in the project root for license information.
+
+%% Einbinden des Pakets für Quelltextformatierung,
+%% entweder Minted oder Listings
+
+%% Minted
+%% Aufzählung der Listings pro section oder chapter
+\usepackage[
+    newfloat,
+    chapter
+]{minted}
+% Für eine Liste verfügbarer Stylesheets:
+% > pygmentize -L styles
+\usemintedstyle{bw}
+
+%% Bei newfloat=false
+% \renewcommand{\listingscaption}{Quelltext}
+% \renewcommand\listoflistingscaption{Quelltexte}
+
+%% Bei newfloat=true
+\SetupFloatingEnvironment{listing}{name=Quelltext}
+\SetupFloatingEnvironment{listing}{listname=Quelltexte}
+
+%% Globale Minted-Optionen
+\setminted{
+    autogobble=true,            %% Whitespace am Zeilenanfang entfernen
+    mathescape,                 %% Mathe in Code erlauben
+    linenos,                    %% Zeilennummerierung zeigen, linenos=false zum Ausschalten
+    numbersep=5pt,              %% Abstand zwischen Zeilennummern und Zeile
+    % fontsize=\footnotesize,     %% Schriftgröße
+    % frame=leftline,             %% Rahmenstil
+    frame=lines,                 %% Rahmenstil
+    rulecolor=Gray,             %% Rahmenfarbe
+    % xleftmargin=5pt,            %% Randbreite links
+    % xrightmargin=5pt,           %% Randbreite rechts
+    framesep=6pt                %% Abstand zwischen Rahmen und Inhalt
+}
+
+\renewcommand{\theFancyVerbLine}{%
+    \sffamily \textcolor{Gray}{%
+        \scriptsize%
+        \addfontfeatures{Numbers={Uppercase,Monospaced}}{\arabic{FancyVerbLine}}}}
+
+% Das Paket minted definiert die Umgebung minted so, dass sie am Ende einen vertikalen 
+% Abstand einfügt. Der trifft dann mit dem vertikalen Abstand der Unterschrift (\caption)
+% zusammen, wodurch dieser Abstand vergrößert wird. Damit ist auch der Weg klar, um das
+% Problem zu lösen. Man muss irgendwie dafür sorgen, dass der Abstand, den minted am Ende
+% einfügt, innerhalb der listing-Umgebung wieder entfernt wird. Das könnte man mit einem
+% \unskip direkt nach \end{minted} lösen oder man ändert minted innerhalb listings generell
+%
+% WTF...
+%
+% Siehe: https://texwelt.de/wissen/fragen/8305/wie-kann-ich-den-abstand-der-caption-zu-einem-mit-minted-erstelltem-listing-verringern
+\pretocmd{\listing}{%
+    \apptocmd{\endminted}{\unskip}{}{\undefined}%
+}{}{\undefined}
+
+%% Minted-Shortcuts für im Dokument häufig
+%% verwendete Programmiersprachen
+%%
+%% Genaue Beschreibungen der Parameter s. Minted-Doku
+% \newminted{python}{
+%    mathescape,			%% Mathe in Code erlauben
+%    numbersep=5pt,		%% Abstand zwischen Zeilennummern und Zeile
+%    gobble=8,			%% Menge der am Zeilenanfang entfernten Whitespaces
+%    frame=leftline, 	%% Rahmenstil
+%    linenos,			%% Zeilennummerierung, linenos=false zum Ausschalten
+%    fontsize=\footnotesize, %% Schriftgröße
+%    xleftmargin=5pt,	%% Randbreite links
+%    xrightmargin=5pt,	%% Randbreite rechts
+%    framesep=5pt    	%% Abstand zwischen Rahmen und Inhalt
+% }
+
+%% Wird dann so verwendet:
+%
+% \begin{csharpcode}
+% 	int i = i*i
+% \end{csharpcode}
+%
+%% Oder mit zusätzlichen Optionen:
+%
+% \begin{csharpcode} { gobble=4, frame=single }
+% 	int i = i*i
+% \end{csharpcode}
+%
+
+
+%% Listings
+% \definecolor{bluekeywords}{rgb}{0.13,0.13,1}
+% \definecolor{greencomments}{rgb}{0,0.5,0}
+% \definecolor{redstrings}{rgb}{0.9,0,0}
+ 
+% \usepackage{listings}
+% \lstset{
+%   language=Python,
+%   showspaces=false,
+%   showtabs=false,
+%   breaklines=true,
+%   showstringspaces=false,
+%   breakatwhitespace=true,
+%   escapeinside={(*@}{@*)},
+%   numbers=left,
+%   numberstyle=\tiny\color{black},
+%   commentstyle=\color{greencomments},
+%   keywordstyle=\color{bluekeywords}\bfseries,
+%   stringstyle=\color{redstrings},
+%   basicstyle=\small\ttfamily
+% }

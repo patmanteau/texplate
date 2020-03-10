@@ -1,0 +1,204 @@
+% Copyright (c) Patrick Haas. All rights reserved.
+%
+% Licensed under the BSD license. See LICENSE.txt
+% in the project root for license information.
+
+% Microtype konfigurieren
+\usepackage[
+    tracking=true,
+    final
+]{microtype}
+
+
+%% ----------------------------------------------------------------------------
+%%
+%% Zeilenabstand
+%%
+%% ----------------------------------------------------------------------------
+
+%% Default ist 1,5facher Zeilenabstand
+\usepackage[onehalfspacing]{setspace}
+
+%% ----------------------------------------------------------------------------
+%%
+%% Floating-Environments
+%%
+%% ----------------------------------------------------------------------------
+
+\deflength\textfloatsep{12.0pt plus 2.0pt minus 2.0pt}
+
+%% ----------------------------------------------------------------------------
+%%
+%% Figure-Environments
+%%
+%% ----------------------------------------------------------------------------
+
+\AtBeginEnvironment{figure}{\microtypesetup{activate=false} \singlespacing}
+
+%% ----------------------------------------------------------------------------
+%%
+%% Listings-Environments
+%%
+%% ----------------------------------------------------------------------------
+
+\AtBeginEnvironment{listings}{\microtypesetup{activate=false} \singlespacing}
+
+%% ----------------------------------------------------------------------------
+%%
+%% Verbatim-Environments
+%%
+%% ----------------------------------------------------------------------------
+
+\AtBeginEnvironment{verbatim}{\microtypesetup{activate=false}}
+
+%% ----------------------------------------------------------------------------
+%%
+%% Tabellen
+%%
+%% ----------------------------------------------------------------------------
+
+%% Tabular figures für Tabellen ;-)
+\AtBeginEnvironment{longtable}{\addfontfeatures{Numbers={Lowercase,Monospaced}} \singlespacing}
+\AtBeginEnvironment{tabular}{\addfontfeatures{Numbers={Lowercase,Monospaced}}}
+
+%% ----------------------------------------------------------------------------
+%%
+%% Mikrotypographische Feinheiten
+%%
+%% ----------------------------------------------------------------------------
+
+%% Th - Ligaturen ausschalten
+% \DisableLigatures[T]{encoding = *, family = rm* }
+\usepackage[german]{selnolig} % load selnolig w/o a language option
+\nolig{Th}{T|h} % disable "Th" ligature globally
+
+%% Aufrechte Klammern in kursivem Text
+%\usepackage[biblatex=true]{embrac}
+% Einstellungen für Skolar
+%\AddEmph{[}{]}[.04em,0.8em]
+
+%% ----------------------------------------------------------------------------
+%%
+%% Seite
+%%
+%% ----------------------------------------------------------------------------
+
+%% Seitenzahl
+\addtokomafont{pagenumber}{%
+    \addfontfeatures{Numbers={Lining}}\sffamily\bfseries}
+
+%% ----------------------------------------------------------------------------
+%%
+%% Überschriften
+%%
+%% ----------------------------------------------------------------------------
+
+%%  Abschnittsnummerierung in den linken Rand ausrücken.
+%%  Komascript definiert zur Ausgabe der Nummern pro
+%%  Abschnittsart NAME den Befehl \NAMEformat, der hier
+%%  umdefiniert wird. \theNAME gibt die Nummer selber aus,
+%%  \autodot fügt je nach Konfiguration einen Punkt an.
+%%  s. dazu auch scrguide Kap. 21
+\renewcommand*{\sectionformat}{%
+    \makebox[0pt][r]{\rmfamily\mdseries\upshape\thesection\autodot\enskip}}
+\renewcommand*{\subsectionformat}{%
+    \makebox[0pt][r]{\rmfamily\mdseries\upshape\thesubsection\autodot\enskip}}
+\renewcommand*{\subsubsectionformat}{%
+    \makebox[0pt][r]{\rmfamily\mdseries\itshape\thesubsubsection\autodot\enskip}}
+\renewcommand*{\paragraphformat}{%
+    \makebox[0pt][r]{\theparagraph\autodot\enskip}}
+\renewcommand*{\paragraphformat}{%
+    \makebox[0pt][r]{\thesubparagraph\autodot\enskip}}
+
+%% Auszeichnungen
+\addtokomafont{section}{%
+    %%\color{darkgray}\sffamily\bfseries\Large%
+    %\lsstyle\color{darkgray}\sffamily\bfseries\uppercase}
+    %\rmfamily\mdseries\upshape\lsstyle}
+    \addfontfeatures{Numbers={Uppercase}}\rmfamily\mdseries\upshape}
+\addtokomafont{subsection}{%
+    %\color{darkgray}\sffamily\bfseries\scshape}
+    \rmfamily\mdseries\scshape}
+\addtokomafont{subsubsection}{%
+%    \color{darkgray}\sffamily\bfseries%
+    \rmfamily\mdseries\itshape}
+%\addtokomafont{disposition}{%
+%    \color{darkgray}}
+
+%% Abstände um Überschriften ändern
+%% s. http://texwelt.de/wissen/fragen/10289/wie-andere-ich-die-abstande-uberunter-section-subsection-subsubsection
+%\RedeclareSectionCommand[%
+  %beforeskip=-1em,%
+  %afterskip=1sp]{section}
+%\RedeclareSectionCommand[%
+  %beforeskip=-1em,%
+  %afterskip=1sp]{subsection}
+%\RedeclareSectionCommand[%
+  %beforeskip=-1em,%
+  %afterskip=1sp]{subsubsection}
+\RedeclareSectionCommands[%
+  beforeskip=-1\baselineskip,%
+  afterskip=1sp%
+]{section,subsection,subsubsection}
+
+%% ----------------------------------------------------------------------------
+%%
+%% Fußnoten
+%%
+%% ----------------------------------------------------------------------------
+
+%% Schriftart der Fußnotenmarke
+\addtokomafont{footnotelabel}{%
+    \sffamily\bfseries}
+
+% %% Ziffern linksbündig, Text darunter ausgerichtet
+% \deffootnote{1.5em}{1em}{%
+% %% \makebox[1.5em][l]{\addfontfeatures{Numbers={Proportional,Lining}}\textbf\thefootnotemark}%
+%   \makebox[1.5em][l]{\thefootnotemark}%
+% }
+
+%% Ziffern in den Rand ausgerückt, Text darunter ausgerichtet
+\deffootnote{0em}{1em}{%
+%% \makebox[1.5em][l]{\addfontfeatures{Numbers={Proportional,Lining}}\textbf\thefootnotemark}%
+  \makebox[0pt][r]{\thefootnotemark\enskip}%
+}
+
+%% Ziffern in den Rand ausgerückt, Text linksbündig
+%% \deffootnote{0em}{1em}{%
+%%   \makebox[0pt][r]{\textbf\thefootnotemark\enskip}%
+%% }
+
+%% Ziffern in den Rand ausgerückt, Text linksbündig
+%% \deffootnote[1.5em]{0em}{1.5em}{%
+%%   \makebox[1.5em][l]{\textbf\thefootnotemark}%
+%% }
+
+%% ----------------------------------------------------------------------------
+%%
+%% Definiert \textuppercase - Text in GROẞBUCHSTABEN mit Tracking
+%%
+%% ----------------------------------------------------------------------------
+\makeatletter
+\newcommand{\textuppercase}[1]{%
+  {%
+    \addfontfeatures{Numbers={Uppercase,Proportional}}%
+    \microtypecontext{tracking=allcaps}%
+    \lsstyle\MakeUppercase{#1}}}%
+
+\renewcommand{\sectionlinesformat}[4]{%
+    \Ifstr{#1}{section}{%
+        \@hangfrom{\hskip #2#3}{\textuppercase{#4}}%
+    }{%
+        \@hangfrom{\hskip #2#3}{#4}%
+    }%
+}
+\makeatother
+
+%% ----------------------------------------------------------------------------
+%%
+%% Literaturverzeichnis
+%%
+%% ----------------------------------------------------------------------------
+
+%% Familienname in Kapitälchen
+\renewcommand{\mkbibnamefamily}[1]{\textsc{#1}}

@@ -1,0 +1,72 @@
+% Copyright (c) Patrick Haas. All rights reserved.
+%
+% Licensed under the BSD license. See LICENSE.txt
+% in the project root for license information.
+
+% s. https://typefacts.com/artikel/kerningtest
+I “Ask Jeff” or ‘Ask Jeff’. Take the chef d’œuvre! \emph{Two of [of] (of) 
+‘of’ “of” of? of! of*.}\emph{Two of [of] (of) ‘of’ “of” of? of! of*}. Ydes,
+Yffignac and Ygrande are in France: so are Ypres, Les Woëvres, the Fôret
+de Wœvres, the Voire and Vauvise. Yves is in heaven; D’Amboise is in jail.
+Lyford’s in Texas \& L’Anse-aux-Griffons in Québec; the Łyna in Poland.
+Yriarte, Yciar and Ysaÿe are at Yale. Kyoto and Ryotsu are both in Japan,
+Kwikpak on the Yukon delta, Kvæven in Norway, Kyulu in Kenya, not in
+Rwanda.…Walton’s in West Virginia, but «Wren» is in Oregon. Tlálpan is
+near Xochimilco in México. The Zygos \& Xylophagou are in Cyprus, Zwettl
+in Austria, Fænø in Denmark, the Vøringsfossen and Værøy in Norway. Tchula
+is in Mississippi, the Tittabawassee in Michigan. Twodot is here in Montana,
+Ywamun in Burma. Yggdrasil and Ymir, Yngvi and Vóden, Vídrið and Skeggjöld
+and Týr are all in the Eddas. Tørberget and Våg, of course, are in Norway,
+Ktipas and Tmolos in Greece, but Vázquez is in Argentina, Vreden in
+Germany, Von-Vincke-Straße in Münster, Vdovino in Russia, Ytterbium in the
+periodic table. Are Toussaint L’Ouverture, Wölfflin, Wolfe, Miłosz and Wū Wŭ
+all in the library? 184-110, 1510--1620, 1620---1730, 11:00 pm, and the 1980s
+are over. Em---dashes are larger than en--dashes are longer than 
+old-fashioned hyphens.
+
+Ist da „Jemand“? „Volker?“ – „Wolf“. „Anna?“ – „Yvonne“. „Torsten fragte:
+‚Vladimir?‘, später rief er ‚Wolf‘ und ‚Theresa‘, dann ‚Andreas‘ und ‚Yvonne‘“.
+Eleganter: Ist da »Jemand«? »Volker?« – »Wolf«. »Anna?« – »Yvonne«. »Torsten
+fragte: ›Vladimir?‹, später rief er ›Wolf‹ und ›Theresa‹, dann ›Andreas‹ 
+und ›Yvonne‹«.
+
+% for embrac
+\emph{%
+a[a]a b[b]b c[c]c d[d]d e[e]e f[f]f %
+g[g]g h[h]h i[i]i j[j]j k[k]k l[l]l %
+m[m]m n[n]n o[o]o p[p]p q[q]q r[r]r %
+s[s]s t[t]t u[u]u v[v]v w[w]w x[x]x %
+y[y]y z[z]z.%
+} \par
+\emph{%
+A[A]A B[B]B C[C]C D[D]D E[E]E F[F]F %
+G[G]G H[H]H I[I]I J[J]J K[K]K L[L]L %
+M[M]M N[N]N O[O]O P[P]P Q[Q]Q R[R]R %
+S[S]S T[T]T U[U]U V[V]V W[W]W X[X]X %
+Y[Y]Y Z[Z]Z.%
+} \par
+{\addfontfeatures{Numbers={Proportional,OldStyle}}%
+\emph{%
+0[0]0 1[1]1 2[2]2 3[3]3 4[4]4 %
+5[5]5 6[6]6 7[7]7 8[8]8 9[9]9
+}} \par
+{\addfontfeatures{Numbers={Proportional,Lining}}%
+\emph{%
+0[0]0 1[1]1 2[2]2 3[3]3 4[4]4 %
+5[5]5 6[6]6 7[7]7 8[8]8 9[9]9
+}} \par
+{\addfontfeatures{Numbers={Monospaced,Lining}}%
+\emph{%
+0[0]0 1[1]1 2[2]2 3[3]3 4[4]4 %
+5[5]5 6[6]6 7[7]7 8[8]8 9[9]9
+}} \par
+\emph{%
+[“Ask Jeff”] [‘Ask Jeff’] [„Wolf“] [„Wolf“?] [„Wolf“!] [„Wolf“.] [„Wolf“,] [„Wolf“;]%
+[‚Wolf‘]} \par
+\emph{%
+[›Vladimir?‹] [«Wren»] [mâitre d’] [ä] [ö] [ü] %
+[vérité] [/] [\&]
+} \par
+\emph{%
+[Ä] [Ö] [Ü]
+}

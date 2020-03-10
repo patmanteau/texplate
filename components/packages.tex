@@ -1,0 +1,171 @@
+% Copyright (c) Patrick Haas. All rights reserved.
+%
+% Licensed under the BSD license. See LICENSE.txt
+% in the project root for license information.
+
+%% Sprachspezifika laden
+% \usepackage[
+%     english,
+%     french,
+%     ngerman,
+%     headfoot=ngerman
+% ]{babel}
+\usepackage{polyglossia}
+\setdefaultlanguage{german}
+\setotherlanguages{english,french}
+\gappto\captionsgerman{\def\abbreviationsname{Abkürzungen}}
+
+%% hyperref aware footnote.sty
+\usepackage{footnotehyper}
+
+%% Bibliographie einrichten
+%% Zu den Optionen: s. Biblatex-Dokumentation
+\usepackage[
+    bibstyle=authoryear,
+    mergedate=false,            % Das Erscheinungsjahr immer zweimal ausgeben
+    citestyle=authoryear-icomp,
+    doi=false,
+    eprint=true,
+    url=false,
+    isbn=false,
+    date=year,
+    urldate=long,
+    %autocite=footnote,
+    autocite=inline,
+    hyperref=true,
+    ibidpage=true,
+    ibidtracker=constrict,
+    pagetracker=true,
+    language=auto,
+    arxiv=abs,
+    backend=biber,
+    sortcites=true,
+    sortlocale=auto,
+    maxcitenames=2,      % im Dokumentenkörper ab dem 3. Verfasser abkürzen
+    maxbibnames=1000,    % in der Bibliographie "nie"
+]{biblatex}
+
+\usepackage{url}
+\setcounter{biburllcpenalty}{7000}
+\setcounter{biburlucpenalty}{8000}
+
+\usepackage{scrlayer-scrpage}
+\pagestyle{scrheadings}
+% \automark{section}
+
+%% Angenommen, Sie wollen, dass Abschnittsüberschriften im Kolumnentitel ohne
+%% Gliederungsnummer gesetzt werden, so ist das ganz einfach mit:
+% \renewcommand*{\sectionmarkformat}{}
+
+\ihead[]{\headmark} 
+% \ihead[]{} 
+\chead*{}
+\ohead*{\pagemark}
+\iftoggle{final_version}{%
+    \cfoot*{}%
+}{%
+    \cfoot*{\textcolor{tol7q2}{DRAFT}}%
+}
+
+\iftoggle{TG_use_geometry}{
+    \usepackage[
+        left=\texplatemarginleft,
+        right=\texplatemarginright,
+        top=\texplatemargintop,
+        bottom=\texplatemarginbottom,
+        a4paper
+    ]{geometry}
+}
+
+%% Erweiterte Optionen für Captions von Floats, entweder per caption:
+% \usepackage[
+%     position=below,
+%     % tableposition=below,
+%     % margin=15pt,
+%     width=.75\textwidth,
+%     format=hang,
+%     font={normalsize, sf, singlespacing},
+%     labelfont={normalsize, sf, it, singlespacing},
+%     labelsep=colon,
+%     skip=12pt plus 2pt minus 2pt
+% ]{caption}
+%% oder per KOMAscript:
+\setkomafont{caption}{\sffamily}
+\setkomafont{captionlabel}{\scshape}
+\usepackage{ragged2e}
+\setcaptionalignment[figure]{L} % L=linksbündig mit ragged2e
+\setcaptionalignment[table]{L}
+
+%% Pimp my Matheumgebung!
+% \usepackage{amsmath}
+%\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{lualatex-math}
+
+%% Differentialkoeffizienten einfach schreiben
+%\usepackage{diffcoeff}
+
+%% Erweiterte amsmath-Environments
+%\usepackage{empheq}
+
+%% Environments für Optimierungsprobleme
+%\usepackage{optidef}
+
+%% LuaTeX einrichten
+\usepackage[tuenc]{fontspec}
+\usepackage[
+    math-style=ISO,
+    partial=upright,
+    sans-style=upright
+]{unicode-math}
+\usepackage{luacode}
+
+%% Schöne Grafiken
+\usepackage{pgf,tikz}
+
+%% Todo-Notizen
+%\usepackage{todonotes}
+
+%% Paket für Zeilennummern laden
+%\usepackage{lineno}
+
+%% Automatische Zwischenräume nach Abkürzungen (s. commands.tex)
+\usepackage{xspace}
+
+%% PDF-spezifische Optionen -> Grafiken und Hyperlinks im PDF
+\usepackage{ifpdf}
+
+%% Booktabs-Paket für schönere Tabellen
+\usepackage{longtable}
+\LTpre=0.1pt
+\usepackage{booktabs}
+%% tabularx-Paket für einstellbare Spaltenbreite
+% \usepackage{tabularx}
+% \usepackage{tabu}
+
+% \usepackage{upquote}
+
+%% Mehrspaltiger Satz
+\usepackage{multicol}
+
+%% pdfpages zum Einbinden externer PDFs mit \includepdf
+%\usepackage{pdfpages}
+
+%% enumitem zum Konfigurieren des vertikalen Spacing in Listen
+\usepackage{enumitem}
+
+%% SI-Einheiten
+\usepackage{siunitx}
+
+% \usepackage{float}
+% \floatstyle{komabelow} % KOMA-Script definiert zwei eigene Stile für das float-Paket
+% \restylefloat{table}
+% \restylefloat{figure}
+
+% \usepackage{floatrow}
+% \floatsetup{style=plain}
+
+
+%% Floatende Grafiken etc erst nach ihrer ersten Referenzierung im Text anzeigen, siehe auch
+%% http://stackoverflow.com/questions/547508/in-latex-is-there-a-way-to-put-a-float-automatically-after-where-it-is-first-re
+% \usepackage{flafter}

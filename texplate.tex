@@ -1,0 +1,219 @@
+% Copyright (c) Patrick Haas. All rights reserved.
+%
+% Licensed under the BSD license. See LICENSE.txt
+% in the project root for license information.
+
+\PassOptionsToPackage{luatex}{graphicsx}
+\PassOptionsToPackage{unicode=true,hidelinks}{hyperref} % options for packages loaded elsewhere
+\PassOptionsToPackage{hyphens}{url}
+% \PassOptionsToPackage{tuenc,Renderer=Harfbuzz}{fontspec}
+\PassOptionsToPackage{tuenc}{fontspec}
+\PassOptionsToPackage{cmyk,hyperref,usenames,dvipsnames}{xcolor}
+
+%% Warnungen bei Kacklatex
+%\usepackage[l2tabu, orthodox]{nag}
+
+%% ----------------------------------------------------------------------------
+%% KOMAScript
+%%
+%% fontsize = Schriftgröße,
+%% BCOR = Bindekorrektur
+%% titlepage = Titelei ausgeben
+%% DIV = Textbreite
+%% pagesize = Seitengröße
+%% headings = Überschriftengröße
+%% a4paper = Ausgabe in DIN A4
+%% ----------------------------------------------------------------------------
+\documentclass[
+    fontsize=12,
+    BCOR=15mm,
+    titlepage=true,
+    DIV=12,
+    pagesize=auto,
+    headings=small,
+    headinclude=false,
+    footinclude=true,
+    footlines=2,
+    captions=below,
+    toc=listof,
+    hidelinks,
+    % tablecaptionsbelow,
+    a4paper
+]{scrartcl}
+
+\KOMAoption{toc}{
+  listof
+}
+\KOMAoptions{
+  footnotes=multiple
+}
+
+\usepackage{scrhack}
+
+%% ----------------------------------------------------------------------------
+%% Generation of PDF/X and PDF/A compliant PDFs
+%% See pdfx's documentation.
+%% ----------------------------------------------------------------------------
+%\usepackage[x-4]{pdfx} % for print
+%\usepackage[x-4p]{pdfx} % for print, allow externally supplied color profile
+\usepackage[a-1b]{pdfx} % for archival
+
+%% ----------------------------------------------------------------------------
+%% Basiskonfiguration einbinden
+%% ----------------------------------------------------------------------------
+\usepackage{etoolbox}
+
+\newtoggle{final_version}
+\newtoggle{TG_use_geometry}
+\newtoggle{use_pandoc}
+
+\IfFileExists{texplate-config.tex}%
+    {\input{texplate-config.tex}}%
+    {\input{texplate-config-default.tex}}
+
+\nottoggle{final_version}{%
+    \KOMAoption{draft}{true}
+}
+
+% From https://github.com/jgm/pandoc/blob/master/data/templates/default.latex
+\usepackage{graphicx}
+% \makeatletter
+% \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+% \def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+% \makeatother
+% % Scale images if necessary, so that they will not overflow the page
+% % margins by default, and it is still possible to overwrite the defaults
+% % using explicit options in \includegraphics[width, height, ...]{}
+% \setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% % Set default figure placement to htbp
+% \makeatletter
+% \def\fps@figure{htbp}
+% \makeatother
+
+%% ----------------------------------------------------------------------------
+%% Kommandos zur Fehlersuche einbinden (nur in Vorabversionen)
+%% ----------------------------------------------------------------------------
+\nottoggle{final_version}{%
+    \input{components/debug.tex}%
+}
+
+%% ----------------------------------------------------------------------------
+%% Farbdefinitionen einbinden
+%% ----------------------------------------------------------------------------
+\input{components/colors.tex}
+
+%% ----------------------------------------------------------------------------
+%% Pakete einbinden
+%% ----------------------------------------------------------------------------
+\input{components/packages.tex}
+
+%% ----------------------------------------------------------------------------
+%% Typographische Besonderheiten konfigurieren
+%% ----------------------------------------------------------------------------
+\input{components/typography.tex}
+
+%% ----------------------------------------------------------------------------
+%% Schriftsetup
+%% ----------------------------------------------------------------------------
+% \input{components/fonts-libertinus.tex}
+\input{components/fonts-skolar.tex}
+% \input{components/fonts-alegreya.tex}
+% \input{components/fonts-minion.tex}
+%% \input{components/fonts-garamondpp.tex}
+% \input{components/fonts-ffmeta.tex}
+%% \input{components/fonts-ffscala.tex}
+%% \input{components/fonts-fffranziska.tex}
+%% \input{components/fonts-lyon.tex}
+%% \input{components/fonts-fftisa.tex}
+%% \input{components/fonts-skolar-light.tex}
+%% \input{components/fonts-andron.tex}
+% \input{components/fonts-theantiqua.tex}
+%% \input{components/fonts-gyretermes.tex}
+
+%% ----------------------------------------------------------------------------
+%% Verzeichnisse umbenennen
+%% ----------------------------------------------------------------------------
+\renewcaptionname{german}{\contentsname}{Inhalt}
+\renewcaptionname{german}{\listfigurename}{Abbildungen}
+\renewcaptionname{german}{\listtablename}{Tabellen}
+\renewcaptionname{german}{\figurename}{Abbildung}
+\renewcaptionname{german}{\tablename}{Tabelle}
+
+%% ----------------------------------------------------------------------------
+%% Weitere Konfigurationsdateien laden
+%% ----------------------------------------------------------------------------
+\input{components/commands.tex}
+\input{components/code.tex}
+
+%% ----------------------------------------------------------------------------
+%% Quotation einrichten
+%% ----------------------------------------------------------------------------
+\iftoggle{final_version}{%
+    \usepackage[strict=true,autostyle,german=guillemets,french=guillemets]{csquotes} % "Releasemodus"
+}{%
+    \usepackage[strict=false,debug=true,german=guillemets,french=guillemets]{csquotes} % "Debugmodus"
+}
+% \SetBlockThreshold{3}         % Blockquote ab 3 Zeilen
+% \SetBlockEnvironment{quote}   % Name des Environments für Blockquotes (bspw. "quote")
+\SetCiteCommand{\autocite}      % Das Zitationskommando (default: \cite)
+
+%% hyperref immer nah am Ende laden!
+\ifpdf
+    % \usepackage[luatex]{graphicx}
+    \usepackage[unicode=true,hidelinks]{hyperref}
+    %\usepackage{hyperref}
+    \hypersetup{
+        bookmarksnumbered = true,
+        colorlinks  = false,
+        linkcolor   = black,
+        citecolor   = Blue,
+        urlcolor    = Blue,
+        pdftitle    = {\texplatetitle},
+        pdfsubject  = {\texplatesubject},
+        pdfauthor   = {\texplateauthor}
+    }
+\else 
+%    \usepackage{graphicx}
+   \usepackage[hidelinks]{hyperref}    
+   \hypersetup{
+     pdftitle    = {\texplatetitle},
+     pdfsubject  = {\texplatesubject},
+     pdfauthor   = {\texplateauthor}
+   }
+\fi
+
+%% glossaries-extra für Glossar und Abkürzungsverzeichnis
+\usepackage[
+    xindy={language=german-duden,codepage=utf8},
+    nomain,
+    toc=true,
+    abbreviations,
+    nonumberlist, % um Rückreferenzen zu unterdrücken
+    nopostdot
+]{glossaries-extra}
+\usepackage{glossary-longragged}
+\usepackage{glossaries-extra-stylemods}
+
+\setglossarystyle{longragged}
+\setabbreviationstyle[acronym]{long-short-sc}
+\loadglsentries{components/glossar}
+\makeglossaries
+
+%% Datum setzen
+\date{}
+
+%% Einbinden der Bibliographiedatei aus Mendeley, Zotero, etc...
+\addbibresource{library.bib}
+%% Bibliographie erzeugen
+\bibliography{library}{}
+
+% Satzspiegel neuberechnen
+\nottoggle{TG_use_geometry}{\recalctypearea}
+
+%% Aufzählungen mittels itemize ohne Raum zwischen den Elementen
+\setlist{noitemsep}
+%% Aufzählungen mittels itemize ohne Raum zwischen den Elementen
+%% und ohne Raum um die Aufzählung
+%% \setlist{nosep}
+
+\input{pandoc.tex}

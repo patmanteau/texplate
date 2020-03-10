@@ -1,1 +1,1 @@
-Eine einfache LaTeX-Vorlage zum Einsatz mit xelatex.
+ Meine LuaLaTeX-Vorlage für wissenschaftliche Arbeiten.

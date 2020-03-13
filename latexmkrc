@@ -1,3 +1,7 @@
+# $out_dir = 'build';
+# $aux_dir = 'build';
+$default_files = ("texplate.tex");
+
 #
 # glossaries/glossaries-extra braucht einen Extraschritt...
 #

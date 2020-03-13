@@ -151,11 +151,10 @@
 \addtokomafont{footnotelabel}{%
     \sffamily\bfseries}
 
-% %% Ziffern linksbündig, Text darunter ausgerichtet
-% \deffootnote{1.5em}{1em}{%
-% %% \makebox[1.5em][l]{\addfontfeatures{Numbers={Proportional,Lining}}\textbf\thefootnotemark}%
-%   \makebox[1.5em][l]{\thefootnotemark}%
-% }
+%% Ziffern linksbündig, Text darunter ausgerichtet
+\deffootnote{1em}{1em}{%
+  \makebox[1em][l]{\thefootnotemark}%
+}
 
 %% Ziffern in den Rand ausgerückt, Text darunter ausgerichtet
 % \deffootnote{0em}{1em}{%
@@ -185,13 +184,13 @@
     \microtypecontext{tracking=allcaps}%
     \lsstyle\MakeUppercase{#1}}}%
 
-\renewcommand{\sectionlinesformat}[4]{%
-    \Ifstr{#1}{section}{%
-        \@hangfrom{\hskip #2#3}{\textuppercase{#4}}%
-    }{%
-        \@hangfrom{\hskip #2#3}{#4}%
-    }%
-}
+% \renewcommand{\sectionlinesformat}[4]{%
+%     \Ifstr{#1}{section}{%
+%         \@hangfrom{\hskip #2#3}{\textuppercase{#4}}%
+%     }{%
+%         \@hangfrom{\hskip #2#3}{#4}%
+%     }%
+% }
 \makeatother
 
 %% ----------------------------------------------------------------------------

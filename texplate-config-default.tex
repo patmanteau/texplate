@@ -10,7 +10,7 @@
 \settoggle{TG_use_geometry}{true}
 
 %% Pandoc-Anpassungen ein/aus
-\settoggle{use_pandoc}{true}
+\settoggle{use_pandoc}{false}
 
 %% Titel der Arbeit
 \newcommand{\texplatetitle}{Analyse und Visualisierung von Beziehungen zwischen Musikern auf der Grundlage von Musik-Metadaten unter Anwendung von Methoden der sozialen Netzwerkanalyse\xspace}
@@ -25,10 +25,9 @@
 %% Ort
 \newcommand{\texplatelocation}{Bonn\xspace}
 
-\iftoggle{TG_use_geometry}{
-    %% Seitenränder für geometry-Paket
-    \newcommand{\texplatemarginleft}{4cm}
-    \newcommand{\texplatemarginright}{2cm}
-    \newcommand{\texplatemargintop}{3cm}
-    \newcommand{\texplatemarginbottom}{2.5cm}
-}
+%% Seitenränder für geometry-Paket
+\newcommand{\texplatemarginleft}{4cm}%
+\newcommand{\texplatemarginright}{2cm}%
+\newcommand{\texplatemargintop}{3cm}%
+\newcommand{\texplatemarginbottom}{2.5cm}%
+

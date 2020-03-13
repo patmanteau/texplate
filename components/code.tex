@@ -4,13 +4,10 @@
 % in the project root for license information.
 
 %% ----------------------------------------------------------------------------
-%% Einbinden des Pakets für Quelltextformatierung,
-%% entweder Minted oder Listings
+%% Minted für Quelltextformatierung,
 %% ----------------------------------------------------------------------------
 
-%% Minted
-
-%% Aufzählung der Listings pro section oder chapter
+%% Für scrartcl: Aufzählung der Listings pro section 
 \usepackage[
     newfloat,
     section
@@ -33,12 +30,8 @@
     mathescape,                 %% Mathe in Code erlauben
     linenos,                    %% Zeilennummerierung zeigen, linenos=false zum Ausschalten
     numbersep=5pt,              %% Abstand zwischen Zeilennummern und Zeile
-    % fontsize=\footnotesize,     %% Schriftgröße
-    % frame=leftline,             %% Rahmenstil
     frame=lines,                 %% Rahmenstil
     rulecolor=Gray,             %% Rahmenfarbe
-    % xleftmargin=5pt,            %% Randbreite links
-    % xrightmargin=5pt,           %% Randbreite rechts
     framesep=6pt                %% Abstand zwischen Rahmen und Inhalt
 }
 
@@ -88,28 +81,3 @@
 % \begin{csharpcode} { gobble=4, frame=single }
 % 	int i = i*i
 % \end{csharpcode}
-%
-
-
-%% Listings
-
-% \definecolor{bluekeywords}{rgb}{0.13,0.13,1}
-% \definecolor{greencomments}{rgb}{0,0.5,0}
-% \definecolor{redstrings}{rgb}{0.9,0,0}
- 
-% \usepackage{listings}
-% \lstset{
-%   language=Python,
-%   showspaces=false,
-%   showtabs=false,
-%   breaklines=true,
-%   showstringspaces=false,
-%   breakatwhitespace=true,
-%   escapeinside={(*@}{@*)},
-%   numbers=left,
-%   numberstyle=\tiny\color{black},
-%   commentstyle=\color{greencomments},
-%   keywordstyle=\color{bluekeywords}\bfseries,
-%   stringstyle=\color{redstrings},
-%   basicstyle=\small\ttfamily
-% }

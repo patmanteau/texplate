@@ -77,19 +77,7 @@
     ]{geometry}
 }
 
-%% Erweiterte Optionen für Captions von Floats, entweder per caption:
-% \usepackage[
-%     position=below,
-%     % tableposition=below,
-%     % margin=15pt,
-%     width=.75\textwidth,
-%     format=hang,
-%     font={normalsize, sf, singlespacing},
-%     labelfont={normalsize, sf, it, singlespacing},
-%     labelsep=colon,
-%     skip=12pt plus 2pt minus 2pt
-% ]{caption}
-%% oder per KOMAscript:
+%% Caption-Format:
 \setkomafont{caption}{\sffamily}
 \setkomafont{captionlabel}{\itshape}
 % \usepackage{ragged2e}
@@ -140,6 +128,7 @@
 \usepackage{longtable}
 \LTpre=0.1pt
 \usepackage{booktabs}
+
 %% tabularx-Paket für einstellbare Spaltenbreite
 % \usepackage{tabularx}
 % \usepackage{tabu}
@@ -157,15 +146,6 @@
 
 %% SI-Einheiten
 \usepackage{siunitx}
-
-% \usepackage{float}
-% \floatstyle{komabelow} % KOMA-Script definiert zwei eigene Stile für das float-Paket
-% \restylefloat{table}
-% \restylefloat{figure}
-
-% \usepackage{floatrow}
-% \floatsetup{style=plain}
-
 
 %% Floatende Grafiken etc erst nach ihrer ersten Referenzierung im Text anzeigen, siehe auch
 %% http://stackoverflow.com/questions/547508/in-latex-is-there-a-way-to-put-a-float-automatically-after-where-it-is-first-re

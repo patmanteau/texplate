@@ -21,8 +21,11 @@
 % \renewcommand\listoflistingscaption{Quelltexte}
 
 %% Bei newfloat=true
-\SetupFloatingEnvironment{listing}{name=Quelltext}
-\SetupFloatingEnvironment{listing}{listname=Quelltexte}
+\SetupFloatingEnvironment{listing}{
+    name=Quelltext,
+    listname=Quelltexte,
+    within=none
+}
 
 %% Globale Minted-Optionen
 \setminted{

@@ -28,7 +28,7 @@
     titlepage=true,         % Titelseite ausgeben
     DIV=12,                 % Textbreite
     pagesize=auto,          % Seitengröße
-    headings=small,         % Basisgröße der Überschriften
+    headings=normal,        % Basisgröße der Überschriften
     headinclude=false,
     footinclude=true,
     footlines=2,
@@ -64,9 +64,7 @@
 \newtoggle{TG_use_geometry}
 \newtoggle{use_pandoc}
 
-\IfFileExists{texplate-config.tex}%
-    {\input{texplate-config.tex}}%
-    {\input{texplate-config-default.tex}}
+\IfFileExists{texplate-config.tex}{\input{texplate-config.tex}}{\input{texplate-config-default.tex}}
 
 \nottoggle{final_version}{%
     \KOMAoption{draft}{true}
@@ -179,7 +177,7 @@
 \usepackage{glossaries-extra-stylemods}
 
 \setglossarystyle{longragged}
-\setabbreviationstyle[acronym]{long-short-sc}
+\setabbreviationstyle[acronym]{long-short}
 \loadglsentries{components/glossar}
 \makeglossaries
 
@@ -188,11 +186,8 @@
 
 %% Einbinden der Bibliographiedatei aus Mendeley, Zotero, etc...
 \IfFileExists{library.bib}%
-    {\addbibresource{library.bib}}%
-    {\addbibresource{library-example.bib}}
-
-%% Bibliographie erzeugen
-\bibliography{library}{}
+    {\addbibresource{library.bib}\bibliography{library}{}}%
+    {\addbibresource{library-example.bib}\bibliography{library-example}{}}
 
 % Satzspiegel neuberechnen
 \nottoggle{TG_use_geometry}{\recalctypearea}

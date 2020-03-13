@@ -93,53 +93,53 @@
 %%
 %% ----------------------------------------------------------------------------
 
-%%  Abschnittsnummerierung in den linken Rand ausrücken.
-%%  Komascript definiert zur Ausgabe der Nummern pro
-%%  Abschnittsart NAME den Befehl \NAMEformat, der hier
-%%  umdefiniert wird. \theNAME gibt die Nummer selber aus,
-%%  \autodot fügt je nach Konfiguration einen Punkt an.
-%%  s. dazu auch scrguide Kap. 21
-\renewcommand*{\sectionformat}{%
-    \makebox[0pt][r]{\rmfamily\mdseries\upshape\thesection\autodot\enskip}}
-\renewcommand*{\subsectionformat}{%
-    \makebox[0pt][r]{\rmfamily\mdseries\upshape\thesubsection\autodot\enskip}}
-\renewcommand*{\subsubsectionformat}{%
-    \makebox[0pt][r]{\rmfamily\mdseries\itshape\thesubsubsection\autodot\enskip}}
-\renewcommand*{\paragraphformat}{%
-    \makebox[0pt][r]{\theparagraph\autodot\enskip}}
-\renewcommand*{\paragraphformat}{%
-    \makebox[0pt][r]{\thesubparagraph\autodot\enskip}}
+% %%  Abschnittsnummerierung in den linken Rand ausrücken.
+% %%  Komascript definiert zur Ausgabe der Nummern pro
+% %%  Abschnittsart NAME den Befehl \NAMEformat, der hier
+% %%  umdefiniert wird. \theNAME gibt die Nummer selber aus,
+% %%  \autodot fügt je nach Konfiguration einen Punkt an.
+% %%  s. dazu auch scrguide Kap. 21
+% \renewcommand*{\sectionformat}{%
+%     \makebox[0pt][r]{\rmfamily\mdseries\upshape\thesection\autodot\enskip}}
+% \renewcommand*{\subsectionformat}{%
+%     \makebox[0pt][r]{\rmfamily\mdseries\upshape\thesubsection\autodot\enskip}}
+% \renewcommand*{\subsubsectionformat}{%
+%     \makebox[0pt][r]{\rmfamily\mdseries\itshape\thesubsubsection\autodot\enskip}}
+% \renewcommand*{\paragraphformat}{%
+%     \makebox[0pt][r]{\theparagraph\autodot\enskip}}
+% \renewcommand*{\paragraphformat}{%
+%     \makebox[0pt][r]{\thesubparagraph\autodot\enskip}}
 
-%% Auszeichnungen
-\addtokomafont{section}{%
-    %%\color{darkgray}\sffamily\bfseries\Large%
-    %\lsstyle\color{darkgray}\sffamily\bfseries\uppercase}
-    %\rmfamily\mdseries\upshape\lsstyle}
-    \addfontfeatures{Numbers={Uppercase}}\rmfamily\mdseries\upshape}
-\addtokomafont{subsection}{%
-    %\color{darkgray}\sffamily\bfseries\scshape}
-    \rmfamily\mdseries\scshape}
-\addtokomafont{subsubsection}{%
-%    \color{darkgray}\sffamily\bfseries%
-    \rmfamily\mdseries\itshape}
-%\addtokomafont{disposition}{%
-%    \color{darkgray}}
+% %% Auszeichnungen
+% \addtokomafont{section}{%
+%     %%\color{darkgray}\sffamily\bfseries\Large%
+%     %\lsstyle\color{darkgray}\sffamily\bfseries\uppercase}
+%     %\rmfamily\mdseries\upshape\lsstyle}
+%     \addfontfeatures{Numbers={Uppercase}}\rmfamily\mdseries\upshape}
+% \addtokomafont{subsection}{%
+%     %\color{darkgray}\sffamily\bfseries\scshape}
+%     \rmfamily\mdseries\scshape}
+% \addtokomafont{subsubsection}{%
+% %    \color{darkgray}\sffamily\bfseries%
+%     \rmfamily\mdseries\itshape}
+% %\addtokomafont{disposition}{%
+% %    \color{darkgray}}
 
-%% Abstände um Überschriften ändern
-%% s. http://texwelt.de/wissen/fragen/10289/wie-andere-ich-die-abstande-uberunter-section-subsection-subsubsection
-%\RedeclareSectionCommand[%
-  %beforeskip=-1em,%
-  %afterskip=1sp]{section}
-%\RedeclareSectionCommand[%
-  %beforeskip=-1em,%
-  %afterskip=1sp]{subsection}
-%\RedeclareSectionCommand[%
-  %beforeskip=-1em,%
-  %afterskip=1sp]{subsubsection}
-\RedeclareSectionCommands[%
-  beforeskip=-1\baselineskip,%
-  afterskip=1sp%
-]{section,subsection,subsubsection}
+% %% Abstände um Überschriften ändern
+% %% s. http://texwelt.de/wissen/fragen/10289/wie-andere-ich-die-abstande-uberunter-section-subsection-subsubsection
+% %\RedeclareSectionCommand[%
+%   %beforeskip=-1em,%
+%   %afterskip=1sp]{section}
+% %\RedeclareSectionCommand[%
+%   %beforeskip=-1em,%
+%   %afterskip=1sp]{subsection}
+% %\RedeclareSectionCommand[%
+%   %beforeskip=-1em,%
+%   %afterskip=1sp]{subsubsection}
+% \RedeclareSectionCommands[%
+%   beforeskip=-1\baselineskip,%
+%   afterskip=1sp%
+% ]{section,subsection,subsubsection}
 
 %% ----------------------------------------------------------------------------
 %%
@@ -158,10 +158,10 @@
 % }
 
 %% Ziffern in den Rand ausgerückt, Text darunter ausgerichtet
-\deffootnote{0em}{1em}{%
-%% \makebox[1.5em][l]{\addfontfeatures{Numbers={Proportional,Lining}}\textbf\thefootnotemark}%
-  \makebox[0pt][r]{\thefootnotemark\enskip}%
-}
+% \deffootnote{0em}{1em}{%
+% %% \makebox[1.5em][l]{\addfontfeatures{Numbers={Proportional,Lining}}\textbf\thefootnotemark}%
+%   \makebox[0pt][r]{\thefootnotemark\enskip}%
+% }
 
 %% Ziffern in den Rand ausgerückt, Text linksbündig
 %% \deffootnote{0em}{1em}{%
@@ -201,4 +201,4 @@
 %% ----------------------------------------------------------------------------
 
 %% Familienname in Kapitälchen
-\renewcommand{\mkbibnamefamily}[1]{\textsc{#1}}
+% \renewcommand{\mkbibnamefamily}[1]{\textsc{#1}}

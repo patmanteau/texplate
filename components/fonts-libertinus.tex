@@ -3,31 +3,13 @@
 % Licensed under the BSD license. See LICENSE.txt
 % in the project root for license information.
 
-\SetTracking[
-    spacing = {45*,,},
-    outer spacing = {30*,,}
-]{
-    encoding= *,
-    shape = sc
-}{10}
-
-\SetTracking[
-    context = allcaps,
-    spacing = {400*,,},
-    outer spacing = {300*,,}
-]{
-    encoding = *
-}{50}
-
 % Serifenschrift...
 \setmainfont{LibertinusSerif-Regular.otf}[
     Ligatures={Common,TeX},
     % Scale=1, % 1 makes it about Times New Roman size
     BoldFont=LibertinusSerif-Bold.otf,
     ItalicFont=LibertinusSerif-Italic.otf,
-    BoldItalicFont=LibertinusSerif-BoldItalic.otf,
-    Numbers={OldStyle},
-    Contextuals={Alternate}
+    BoldItalicFont=LibertinusSerif-BoldItalic.otf
 ]
 
 % Serifenlose...
@@ -36,12 +18,10 @@
     % Scale=1,
     BoldFont=LibertinusSans-Bold.otf,
     ItalicFont=LibertinusSans-Italic.otf,
-    Numbers={OldStyle},
-    Contextuals={Alternate}
 ]
 
 % Nichtproportionale Schrift...
-\setmonofont{Iosevka}[Scale=MatchLowercase]
+\setmonofont{Consolas}[Scale=MatchLowercase]
 
 % Matheschrift
 \setmathfont{LibertinusMath-Regular.otf}[

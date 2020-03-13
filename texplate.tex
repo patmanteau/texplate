@@ -3,41 +3,38 @@
 % Licensed under the BSD license. See LICENSE.txt
 % in the project root for license information.
 
+
+%% ----------------------------------------------------------------------------
+%% Optionen für Pakete, die indirekt geladen werden
+%% ----------------------------------------------------------------------------
 \PassOptionsToPackage{luatex}{graphicsx}
-\PassOptionsToPackage{unicode=true,hidelinks}{hyperref} % options for packages loaded elsewhere
+\PassOptionsToPackage{unicode=true,hidelinks}{hyperref}
 \PassOptionsToPackage{hyphens}{url}
-% \PassOptionsToPackage{tuenc,Renderer=Harfbuzz}{fontspec}
 \PassOptionsToPackage{tuenc}{fontspec}
 \PassOptionsToPackage{cmyk,hyperref,usenames,dvipsnames}{xcolor}
 
+
+%% ----------------------------------------------------------------------------
 %% Warnungen bei Kacklatex
+%% ----------------------------------------------------------------------------
 %\usepackage[l2tabu, orthodox]{nag}
 
 %% ----------------------------------------------------------------------------
 %% KOMAScript
-%%
-%% fontsize = Schriftgröße,
-%% BCOR = Bindekorrektur
-%% titlepage = Titelei ausgeben
-%% DIV = Textbreite
-%% pagesize = Seitengröße
-%% headings = Überschriftengröße
-%% a4paper = Ausgabe in DIN A4
 %% ----------------------------------------------------------------------------
 \documentclass[
-    fontsize=12,
-    BCOR=15mm,
-    titlepage=true,
-    DIV=12,
-    pagesize=auto,
-    headings=small,
+    fontsize=12,            % Schriftgröße
+    BCOR=15mm,              % Bindekorrektur
+    titlepage=true,         % Titelseite ausgeben
+    DIV=12,                 % Textbreite
+    pagesize=auto,          % Seitengröße
+    headings=small,         % Basisgröße der Überschriften
     headinclude=false,
     footinclude=true,
     footlines=2,
-    captions=below,
+    captions=below,         % Captions als Unterschriften formatieren
     toc=listof,
     hidelinks,
-    % tablecaptionsbelow,
     a4paper
 ]{scrartcl}
 
@@ -115,20 +112,7 @@
 %% ----------------------------------------------------------------------------
 %% Schriftsetup
 %% ----------------------------------------------------------------------------
-% \input{components/fonts-libertinus.tex}
-\input{components/fonts-skolar.tex}
-% \input{components/fonts-alegreya.tex}
-% \input{components/fonts-minion.tex}
-%% \input{components/fonts-garamondpp.tex}
-% \input{components/fonts-ffmeta.tex}
-%% \input{components/fonts-ffscala.tex}
-%% \input{components/fonts-fffranziska.tex}
-%% \input{components/fonts-lyon.tex}
-%% \input{components/fonts-fftisa.tex}
-%% \input{components/fonts-skolar-light.tex}
-%% \input{components/fonts-andron.tex}
-% \input{components/fonts-theantiqua.tex}
-%% \input{components/fonts-gyretermes.tex}
+\input{components/fonts-libertinus.tex}
 
 %% ----------------------------------------------------------------------------
 %% Verzeichnisse umbenennen
@@ -149,9 +133,9 @@
 %% Quotation einrichten
 %% ----------------------------------------------------------------------------
 \iftoggle{final_version}{%
-    \usepackage[strict=true,autostyle,german=guillemets,french=guillemets]{csquotes} % "Releasemodus"
+    \usepackage[strict=true,autostyle]{csquotes} % "Releasemodus"
 }{%
-    \usepackage[strict=false,debug=true,german=guillemets,french=guillemets]{csquotes} % "Debugmodus"
+    \usepackage[strict=false,debug=true]{csquotes} % "Debugmodus"
 }
 % \SetBlockThreshold{3}         % Blockquote ab 3 Zeilen
 % \SetBlockEnvironment{quote}   % Name des Environments für Blockquotes (bspw. "quote")
@@ -203,7 +187,10 @@
 \date{}
 
 %% Einbinden der Bibliographiedatei aus Mendeley, Zotero, etc...
-\addbibresource{library.bib}
+\IfFileExists{library.bib}%
+    {\addbibresource{library.bib}}%
+    {\addbibresource{library-example.bib}}
+
 %% Bibliographie erzeugen
 \bibliography{library}{}
 
@@ -216,4 +203,114 @@
 %% und ohne Raum um die Aufzählung
 %% \setlist{nosep}
 
+\iftoggle{use_pandoc}{%
 \input{pandoc.tex}
+}{%
+%% Dokumentstart
+\begin{document}
+
+%% Römische Ziffern beim Vorspiel... (Titel, Inhaltsverzeichnis etc.)
+\pagenumbering{Roman}
+
+%% Inhaltsverzeichnis sowie Abkürzungs-, Abbildungs-, Tabellen- und Quellcodeverzeichnis ausgeben (mit einfachem Zeilenabstand)
+\begin{singlespace}
+    % Satzspiegel neuberechnen
+    \nottoggle{TG_use_geometry}{\recalctypearea}
+
+    %% Titelseite definieren und ausgeben
+    \input{components/deckblatt.tex}
+
+    %% Seiten erst ab Inhaltsverzeichnis zählen,
+    %% s. Leitfaden S.3 Punkt 11
+    \setcounter{page}{1}
+
+    \microtypesetup{protrusion=false} % Kein optischer Randausgleich für Verzeichnisse
+    \tableofcontents
+
+    \clearpage
+    %% Abkürzungsverzeichnis ausgeben
+    \printglossaries
+    \clearpage
+
+    %% Abbildungsverzeichnis ausgeben
+    \listoffigures
+    \clearpage
+
+    %% Tabellenverzeichnis ausgeben
+    \listoftables
+    \clearpage
+
+    % Listingverzeichnis ausgeben
+    \listoflistings
+    \clearpage
+
+    \microtypesetup{protrusion=true} % optischen Randausgleich wieder anwerfen
+
+\end{singlespace}
+
+% \begin{onehalfspace}
+    % Satzspiegel neuberechnen
+    \nottoggle{TG_use_geometry}{\recalctypearea}
+
+    %% neue Seite,... (s. http://texwelt.de/wissen/fragen/18/was-ist-der-unterschied-zwischen-newpage-pagebreak-und-clearpage)
+    \clearpage
+    %% arabische Ziffern,...
+    \pagenumbering{arabic}
+
+    %% --------------------------------------------------
+    %%
+    %% INSERT THESIS HERE
+    %%
+    %% --------------------------------------------------
+    \input{thesis.tex}
+    %% oder vielleicht besser:
+    % \input{kap1.tex}
+    % \input{kap2.tex}
+    % \input{anh1.tex}
+    % \input{anh2.tex}
+    
+    %% Seitenumbruch
+    \clearpage
+% \end{onehalfspace}
+
+%% Für das Literaturverzeichnis wieder einfacher Zeilenabstand
+\begin{singlespace}
+    % Satzspiegel neuberechnen
+    \nottoggle{TG_use_geometry}{\recalctypearea}
+
+    %% Hack zur Vermeidung von overfull hboxes im Litverzeichnis
+    \emergencystretch=1em
+    %% Literaturverzeichnis ausgeben
+    \printbibliography[heading=bibintoc]
+    %% neue Seite
+    \clearpage
+\end{singlespace}
+
+\newpage
+% Satzspiegel neuberechnen
+\nottoggle{TG_use_geometry}{\recalctypearea}
+\pagenumbering{gobble}
+\section*{Ehrenwörtliche Erklärung}
+% \addcontentsline{toc}{section}{Erklärung}%\addtocontents{toc}{\vfill}
+Hiermit versichere ich, dass die vorliegende Arbeit von mir selbstständig und
+ohne unerlaubte Hilfe angefertigt worden ist, insbesondere dass ich alle
+Stellen, die wörtlich oder annähernd wörtlich aus Veröffentlichungen entnommen
+sind, durch Zitate als solche gekennzeichnet habe. Ich versichere auch, dass die
+von mir eingereichte schriftliche Version mit der digitalen Version
+übereinstimmt. Weiterhin erkläre ich, dass die Arbeit in gleicher oder ähnlicher
+Form noch keiner Prüfungsbehörde/Prüfungsstelle vorgelegen hat. Ich erkläre mich
+damit einverstanden, dass die Arbeit der Öffentlichkeit zugänglich gemacht wird.
+Ich erkläre mich damit einverstanden, dass die Digitalversion dieser Arbeit
+zwecks Plagiatsprüfung auf die Server externer Anbieter hochgeladen werden darf.
+Die Plagiatsprüfung stellt keine Zurverfügungstellung für die Öffentlichkeit
+dar.
+\\
+\\
+\noindent \texplatelocation, den \today
+\begin{flushright}
+$$\overline{~~~~~~~~~~~~~~~~~~~~~~~~~\mbox{(\texplateauthor)}~~~~~~~~~~~~~~~~~~~~~~~~~}$$
+\end{flushright}
+
+\end{document}
+
+} % \iftoggle{use_pandoc}

@@ -3,18 +3,24 @@ library.bib
 
 .DS_Store
 
+_minted-*
+
 *.acn
 *.acr
 *.alg
 *.aux
 *.bbl
+*.bcf
 *.blg
 *.dvi
 *.fdb_latexmk
 *.fls
 *.glg
+*.glg-abr
 *.glo
+*.glo-abr
 *.gls
+*.gls-abr
 *.idx
 *.ilg
 *.ind
@@ -22,17 +28,21 @@ library.bib
 *.lof
 *.log
 *.lot
+*.lol
 *.maf
 *.mtc
 *.mtc0
 *.nav
 *.nlo
 *.out
+*.pdf
 *.pdfsync
 *.ps
+*.run.xml
 *.snm
 *.synctex.gz
 *.toc
 *.vrb
 *.xdy
+*.xmpi
 *.tdo

@@ -57,10 +57,10 @@
 %% Gliederungsnummer gesetzt werden, so ist das ganz einfach mit:
 % \renewcommand*{\sectionmarkformat}{}
 
-\ihead[]{\headmark} 
-% \ihead[]{} 
-\chead*{}
-\ohead*{\pagemark}
+% \ihead[]{\headmark} 
+\ihead[]{} 
+\chead*{\pagemark}
+\ohead*{}
 \iftoggle{final_version}{%
     \cfoot*{}%
 }{%
@@ -91,11 +91,11 @@
 % ]{caption}
 %% oder per KOMAscript:
 \setkomafont{caption}{\sffamily}
-\setkomafont{captionlabel}{\scshape}
-\usepackage{ragged2e}
-\setcaptionalignment[figure]{L} % L=linksbündig mit ragged2e
-\setcaptionalignment[table]{L}
-\setcapmargin{2em}
+\setkomafont{captionlabel}{\itshape}
+% \usepackage{ragged2e}
+% \setcaptionalignment[figure]{L} % L=linksbündig mit ragged2e
+% \setcaptionalignment[table]{L}
+% \setcapmargin{2em}
 
 %% -----------------------------------------
 %% Hilfe, Mathemann!

@@ -27,13 +27,16 @@
 
 \deflength\textfloatsep{12.0pt plus 2.0pt minus 2.0pt}
 
+%% BUG: der AtBeginEnvironment-Krempel unten sorgt dafür, dass "wegfloatende"
+%% Umgebungen Leerzeilen hinterlassen. Keine Ahnung, warum. WTF...
+
 %% ----------------------------------------------------------------------------
 %%
 %% Figure-Environments
 %%
 %% ----------------------------------------------------------------------------
 
-\AtBeginEnvironment{figure}{\microtypesetup{activate=false} \singlespacing}
+% \AtBeginEnvironment{figure}{\microtypesetup{activate=false} \singlespacing}
 
 %% ----------------------------------------------------------------------------
 %%
@@ -41,7 +44,7 @@
 %%
 %% ----------------------------------------------------------------------------
 
-\AtBeginEnvironment{listings}{\microtypesetup{activate=false} \singlespacing}
+% \AtBeginEnvironment{listings}{\microtypesetup{activate=false} \singlespacing}
 
 %% ----------------------------------------------------------------------------
 %%
@@ -49,7 +52,7 @@
 %%
 %% ----------------------------------------------------------------------------
 
-\AtBeginEnvironment{verbatim}{\microtypesetup{activate=false}}
+% \AtBeginEnvironment{verbatim}{\microtypesetup{activate=false}}
 
 %% ----------------------------------------------------------------------------
 %%

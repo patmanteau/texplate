@@ -13,7 +13,6 @@
 \PassOptionsToPackage{tuenc}{fontspec}
 \PassOptionsToPackage{cmyk,hyperref,usenames,dvipsnames}{xcolor}
 
-
 %% ----------------------------------------------------------------------------
 %% Warnungen bei Kacklatex
 %% ----------------------------------------------------------------------------
@@ -251,6 +250,10 @@
     \clearpage
     %% arabische Ziffern,...
     \pagenumbering{arabic}
+
+    %% Hack für fehlerhafte Tabellennummerierung,
+    %% auf jeden Fall im fertigen Dokument checken!
+    \setcounter{table}{0}
 
     %% --------------------------------------------------
     %%

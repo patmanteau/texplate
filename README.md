@@ -18,3 +18,10 @@
 ```
 latexmk -lualatex -shell-escape -quiet texplate.tex
 ```
+
+## Clean
+
+```bash
+latexmk -c # nur Hilfsdateien
+latexmk -C # auch PDF
+```

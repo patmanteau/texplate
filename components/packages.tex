@@ -78,8 +78,21 @@
 }
 
 %% Caption-Format:
-\setkomafont{caption}{\sffamily}
-\setkomafont{captionlabel}{\itshape}
+%% Erweiterte Optionen für Captions von Floats, entweder per caption:
+\usepackage[
+    position=below,
+    % tableposition=below,
+    % margin=15pt,
+    width=.75\textwidth,
+    format=hang,
+    font={normalsize, sf, singlespacing},
+    labelfont={normalsize, sf, it, singlespacing},
+    labelsep=colon,
+    skip=12pt plus 2pt minus 2pt
+]{caption}
+%% oder per KOMAscript:
+% \setkomafont{caption}{\sffamily}
+% \setkomafont{captionlabel}{\itshape}
 % \usepackage{ragged2e}
 % \setcaptionalignment[figure]{L} % L=linksbündig mit ragged2e
 % \setcaptionalignment[table]{L}
@@ -128,6 +141,15 @@
 \usepackage{longtable}
 \LTpre=0.1pt
 \usepackage{booktabs}
+
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
 
 %% tabularx-Paket für einstellbare Spaltenbreite
 % \usepackage{tabularx}

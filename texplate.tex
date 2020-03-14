@@ -8,7 +8,7 @@
 %% Optionen für Pakete, die indirekt geladen werden
 %% ----------------------------------------------------------------------------
 \PassOptionsToPackage{luatex}{graphicsx}
-\PassOptionsToPackage{unicode=true,hidelinks}{hyperref}
+\PassOptionsToPackage{bookmarks,unicode,hidelinks}{hyperref}
 \PassOptionsToPackage{hyphens}{url}
 \PassOptionsToPackage{tuenc}{fontspec}
 \PassOptionsToPackage{cmyk,hyperref,usenames,dvipsnames}{xcolor}
@@ -52,7 +52,8 @@
 %% ----------------------------------------------------------------------------
 %\usepackage[x-4]{pdfx} % for print
 %\usepackage[x-4p]{pdfx} % for print, allow externally supplied color profile
-\usepackage[a-1b]{pdfx} % for archival
+%% Funktioniert nicht mit Umlauten in den Bookmarks :(
+% \usepackage[a-3u,latxmp]{pdfx} % for archival
 
 %% ----------------------------------------------------------------------------
 %% Basiskonfiguration einbinden
@@ -65,8 +66,12 @@
 
 \IfFileExists{texplate-config.tex}{\input{texplate-config.tex}}{\input{texplate-config-default.tex}}
 
-\nottoggle{final_version}{%
-    \KOMAoption{draft}{true}
+\iftoggle{final_version}{%
+    \KOMAoption{draft}{false}%
+    \PassOptionsToPackage{final}{bookmark}%
+}{%
+    \KOMAoption{draft}{true}%
+    \PassOptionsToPackage{draft}{bookmark}%
 }
 
 % From https://github.com/jgm/pandoc/blob/master/data/templates/default.latex
@@ -138,30 +143,14 @@
 % \SetBlockEnvironment{quote}   % Name des Environments für Blockquotes (bspw. "quote")
 \SetCiteCommand{\autocite}      % Das Zitationskommando (default: \cite)
 
-%% hyperref immer nah am Ende laden!
-\ifpdf
-    % \usepackage[luatex]{graphicx}
-    \usepackage[unicode=true,hidelinks]{hyperref}
-    %\usepackage{hyperref}
-    \hypersetup{
-        bookmarksnumbered = true,
-        colorlinks  = false,
-        linkcolor   = black,
-        citecolor   = Blue,
-        urlcolor    = Blue,
-        pdftitle    = {\texplatetitle},
-        pdfsubject  = {\texplatesubject},
-        pdfauthor   = {\texplateauthor}
-    }
-\else 
-%    \usepackage{graphicx}
-   \usepackage[hidelinks]{hyperref}    
-   \hypersetup{
-     pdftitle    = {\texplatetitle},
-     pdfsubject  = {\texplatesubject},
-     pdfauthor   = {\texplateauthor}
-   }
-\fi
+%% bookmark/hyperref immer nah am Ende laden!
+\usepackage{hyperref}
+\usepackage{bookmark}
+\hypersetup{
+    pdftitle    = {\texplatetitle},
+    pdfsubject  = {\texplatesubject},
+    pdfauthor   = {\texplateauthor}
+}
 
 %% glossaries-extra für Glossar und Abkürzungsverzeichnis
 \usepackage[

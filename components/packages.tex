@@ -87,7 +87,11 @@
     labelsep=colon,
     skip=12pt plus 2pt minus 2pt
 ]{caption}
+% Make caption package work with longtable
 \makeatletter
+\def\fnum@table{\tablename~\thetable}
+\makeatother
+
 %% oder per KOMAscript:
 % \setkomafont{caption}{\sffamily}
 % \setkomafont{captionlabel}{\itshape}

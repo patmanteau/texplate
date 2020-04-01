@@ -213,7 +213,13 @@
 
     \clearpage
     %% Abkürzungsverzeichnis ausgeben
+
+    %% Hack für fehlerhafte Tabellenlinks,
+    %% auf jeden Fall im fertigen Dokument checken!
+    \setcounter{table}{599}
     \printglossaries
+    \setcounter{table}{0}
+
     \clearpage
 
     %% Abbildungsverzeichnis ausgeben
@@ -240,10 +246,6 @@
     \clearpage
     %% arabische Ziffern,...
     \pagenumbering{arabic}
-
-    %% Hack für fehlerhafte Tabellennummerierung,
-    %% auf jeden Fall im fertigen Dokument checken!
-    \setcounter{table}{0}
 
     %% --------------------------------------------------
     %%

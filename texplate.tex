@@ -8,10 +8,9 @@
 %% Optionen für Pakete, die indirekt geladen werden
 %% ----------------------------------------------------------------------------
 \PassOptionsToPackage{luatex}{graphicsx}
-\PassOptionsToPackage{bookmarks,unicode,hidelinks}{hyperref}
-\PassOptionsToPackage{hyphens}{url}
+\PassOptionsToPackage{bookmarks,unicode}{hyperref}
 \PassOptionsToPackage{tuenc}{fontspec}
-\PassOptionsToPackage{cmyk,hyperref,usenames,dvipsnames}{xcolor}
+\PassOptionsToPackage{luatex,RGB,hyperref,usenames,svgnames,x11names}{xcolor}
 
 %% ----------------------------------------------------------------------------
 %% Warnungen bei Kacklatex
@@ -19,32 +18,47 @@
 %\usepackage[l2tabu, orthodox]{nag}
 
 %% ----------------------------------------------------------------------------
-%% KOMAScript
+%% KOMAScript-Klasse laden
+%% fontsize = Schriftgröße,
+%% BCOR = Bindekorrektur
+%% titlepage = Titelei ausgeben
+%% DIV = Textbreite
+%% pagesize = Seitengröße
+%% headings = Überschriftengröße
+%% Ausgabe in DIN A4
 %% ----------------------------------------------------------------------------
 \documentclass[
-    fontsize=12,            % Schriftgröße
-    BCOR=15mm,              % Bindekorrektur
-    titlepage=true,         % Titelseite ausgeben
-    DIV=12,                 % Textbreite
-    pagesize=auto,          % Seitengröße
-    headings=normal,        % Basisgröße der Überschriften
+    fontsize=12,
+    BCOR=15mm,
+    titlepage=true,
+    DIV=12,
+    pagesize=auto,
+    headings=small,
     headinclude=false,
     footinclude=true,
     footlines=2,
-    captions=below,         % Captions als Unterschriften formatieren
-    toc=listof,
+    captions=below,
     hidelinks,
+    % toc=listof,
+    footnotes=multiple,
+    twoside=false,
     a4paper
-]{scrartcl}
+]{scrbook}
 
 \KOMAoption{toc}{
-  listof
-}
-\KOMAoptions{
-  footnotes=multiple
+    bibliography,
+    index,
+    indentunnumbered,
+    listof,
+    flat,
+    numberline
 }
 
-\usepackage{scrhack}
+% \KOMAoptions{
+%   footnotes=multiple
+% }
+
+% \usepackage{scrhack}
 
 %% ----------------------------------------------------------------------------
 %% Generation of PDF/X and PDF/A compliant PDFs
@@ -56,15 +70,19 @@
 % \usepackage[a-3u,latxmp]{pdfx} % for archival
 
 %% ----------------------------------------------------------------------------
-%% Basiskonfiguration einbinden
+%%
+%% Schalter:
+%%      + Vorab- und Abgabeversion
+%%      + typearea oder geometry
+%%
 %% ----------------------------------------------------------------------------
 \usepackage{etoolbox}
 
 \newtoggle{final_version}
-\newtoggle{TG_use_geometry}
-\newtoggle{use_pandoc}
+\settoggle{final_version}{true}
 
-\IfFileExists{texplate-config.tex}{\input{texplate-config.tex}}{\input{texplate-config-default.tex}}
+\newtoggle{TG_use_geometry}
+\settoggle{TG_use_geometry}{true}
 
 \iftoggle{final_version}{%
     \KOMAoption{draft}{false}%
@@ -94,7 +112,7 @@
 %% ----------------------------------------------------------------------------
 \nottoggle{final_version}{%
     \input{components/debug.tex}%
-}
+}{}
 
 %% ----------------------------------------------------------------------------
 %% Farbdefinitionen einbinden
@@ -135,13 +153,15 @@
 %% Quotation einrichten
 %% ----------------------------------------------------------------------------
 \iftoggle{final_version}{%
-    \usepackage[strict=true,autostyle]{csquotes} % "Releasemodus"
+    \usepackage[strict=true,autostyle,german=guillemets,french=guillemets]{csquotes} % "Releasemodus"
 }{%
-    \usepackage[strict=false,debug=true]{csquotes} % "Debugmodus"
+    \usepackage[strict=false,debug=true,german=guillemets,french=guillemets]{csquotes} % "Debugmodus"
 }
 % \SetBlockThreshold{3}         % Blockquote ab 3 Zeilen
 % \SetBlockEnvironment{quote}   % Name des Environments für Blockquotes (bspw. "quote")
 \SetCiteCommand{\autocite}      % Das Zitationskommando (default: \cite)
+% \SetCiteCommand{\parencite}
+% \renewcommand{\mkcitation}[1]{ #1}  % Doppelte Klammern um \textquote-Zitierungen verhindern
 
 %% bookmark/hyperref immer nah am Ende laden!
 \usepackage{hyperref}
@@ -155,8 +175,8 @@
 %% glossaries-extra für Glossar und Abkürzungsverzeichnis
 \usepackage[
     xindy={language=german-duden,codepage=utf8},
-    nomain,
-    toc=true,
+    toc,
+    numberline,
     abbreviations,
     nonumberlist, % um Rückreferenzen zu unterdrücken
     nopostdot
@@ -164,6 +184,7 @@
 \usepackage{glossary-longragged}
 \usepackage{glossaries-extra-stylemods}
 
+\makeglossaries
 \setglossarystyle{longragged}
 \setabbreviationstyle[acronym]{long-short}
 \loadglsentries{components/glossar}
@@ -178,7 +199,7 @@
     {\addbibresource{library-example.bib}\bibliography{library-example}{}}
 
 % Satzspiegel neuberechnen
-\nottoggle{TG_use_geometry}{\recalctypearea}
+\nottoggle{TG_use_geometry}{\recalctypearea}{}
 
 %% Aufzählungen mittels itemize ohne Raum zwischen den Elementen
 \setlist{noitemsep}
@@ -202,7 +223,7 @@
 
     %% Titelseite definieren und ausgeben
     % \input{components/deckblatt.tex}
-    \includepdf{components/deckblatt.pdf}
+    \includepdf{assets/deckblatt.pdf}
 
     %% Seiten erst ab Inhaltsverzeichnis zählen,
     %% s. Leitfaden S.3 Punkt 11

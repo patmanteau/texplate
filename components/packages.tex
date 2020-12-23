@@ -14,37 +14,54 @@
 \setdefaultlanguage{german}
 \setotherlanguages{english,french}
 \gappto\captionsgerman{\def\abbreviationsname{Abkürzungen}}
+% Namen für \autoref-Ziele
+\gappto\captionsgerman{\def\figureautorefname{Abbildung}}
+\gappto\captionsgerman{\def\tableautorefname{Tabelle}}
+\gappto\captionsgerman{\def\partautorefname{Teil}}
+\gappto\captionsgerman{\def\appendixautorefname{Anhang}}
+\gappto\captionsgerman{\def\equationautorefname{Gleichung}}
+\gappto\captionsgerman{\def\chapterautorefname{Kapitel}}
+\gappto\captionsgerman{\def\sectionautorefname{Abschnitt}}
+\gappto\captionsgerman{\def\subsectionautorefname{Abschnitt}}
+\gappto\captionsgerman{\def\subsubsectionautorefname{Abschnitt}}
+\gappto\captionsgerman{\def\Hfootnoteautorefname{Fußnote}}
+\gappto\captionsgerman{\def\pageautorefname{Seite}}
+% \providecaptionname{german}\figureautorefname{Abb.}
 
 %% Bibliographie einrichten
 %% Zu den Optionen: s. Biblatex-Dokumentation
 \usepackage[
     bibstyle=authoryear,
     mergedate=false,            % Das Erscheinungsjahr immer zweimal ausgeben
-    citestyle=authoryear-icomp,
+    citestyle=authoryear-comp,
     doi=true,
     eprint=true,
     url=true,
-    isbn=true,
+    isbn=false,
     date=year,
     urldate=long,
     %autocite=footnote,
     autocite=inline,
     hyperref=true,
-    ibidpage=true,
+    % ibidpage=true,
+    % useprefix=true,
     ibidtracker=constrict,
     pagetracker=true,
     language=auto,
     arxiv=abs,
     backend=biber,
+    block=ragged,
+    sorting=nyt,
     sortcites=true,
     sortlocale=auto,
     maxcitenames=2,      % im Dokumentenkörper ab dem 3. Verfasser abkürzen
     maxbibnames=1000,    % in der Bibliographie "nie"
 ]{biblatex}
 
-\usepackage{url}
-\setcounter{biburllcpenalty}{7000}
-\setcounter{biburlucpenalty}{8000}
+\usepackage{xurl}
+% \setcounter{biburllcpenalty}{7000}
+% \setcounter{biburlucpenalty}{8000}
+\urlstyle{rm}
 
 \usepackage{scrlayer-scrpage}
 \pagestyle{scrheadings}
@@ -54,14 +71,14 @@
 %% Gliederungsnummer gesetzt werden, so ist das ganz einfach mit:
 % \renewcommand*{\sectionmarkformat}{}
 
-% \ihead[]{\headmark} 
-\ihead[]{} 
-\chead*{\pagemark}
-\ohead*{}
+\ihead[]{\headmark} 
+% \ihead[]{} 
+\chead*{}
+\ohead*{\pagemark}
 \iftoggle{final_version}{%
     \cfoot*{}%
 }{%
-    \cfoot*{\textcolor{tol7q2}{DRAFT}}%
+    \cfoot*{\textcolor{tol_dark_cyan}{DRAFT}}%
 }
 
 \iftoggle{TG_use_geometry}{
@@ -72,16 +89,16 @@
         bottom=\texplatemarginbottom,
         a4paper
     ]{geometry}
-}
+}{}
 
-%% Caption-Format:
 %% Erweiterte Optionen für Captions von Floats, entweder per caption:
 \usepackage[
     position=below,
     % tableposition=below,
     % margin=15pt,
-    width=.75\textwidth,
-    format=hang,
+    width=.90\textwidth,
+    format=plain,
+    % indention=2em,
     font={normalsize, sf, singlespacing},
     labelfont={normalsize, sf, it, singlespacing},
     labelsep=colon,
@@ -92,13 +109,23 @@
 \def\fnum@table{\tablename~\thetable}
 \makeatother
 
+\usepackage{subcaption}
+
 %% oder per KOMAscript:
 % \setkomafont{caption}{\sffamily}
-% \setkomafont{captionlabel}{\itshape}
+% \setkomafont{captionlabel}{\scshape}
 % \usepackage{ragged2e}
 % \setcaptionalignment[figure]{L} % L=linksbündig mit ragged2e
 % \setcaptionalignment[table]{L}
-% \setcapmargin{2em}
+% \setcapmargin{1em}
+
+%% -----------------------------------------
+%% Fortlaufende Nummerierung für
+%% figure und table
+%% -----------------------------------------
+\usepackage{chngcntr}
+\counterwithout{figure}{chapter}
+\counterwithout{table}{chapter}
 
 %% -----------------------------------------
 %% Hilfe, Mathemann!
@@ -114,6 +141,9 @@
 
 %% Environments für Optimierungsprobleme
 %\usepackage{optidef}
+
+%% Relative Import
+\usepackage{import}
 
 %% LuaTeX einrichten
 \usepackage[tuenc]{fontspec}
@@ -144,6 +174,9 @@
 \LTpre=0.1pt
 \usepackage{booktabs}
 
+\usepackage{pdflscape}
+\usepackage{afterpage}
+
 % Correct order of tables after \paragraph or \subparagraph
 \usepackage{etoolbox}
 \makeatletter
@@ -152,6 +185,9 @@
 % Allow footnotes in longtable head/foot
 \IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
 \makesavenoteenv{longtable}
+
+%% Bunte, gerahmte Boxen für alles
+\usepackage{tcolorbox}
 
 %% tabularx-Paket für einstellbare Spaltenbreite
 % \usepackage{tabularx}
@@ -163,13 +199,22 @@
 \usepackage{multicol}
 
 %% pdfpages zum Einbinden externer PDFs mit \includepdf
-\usepackage{pdfpages}
+% \usepackage{pdfpages}
 
 %% enumitem zum Konfigurieren des vertikalen Spacing in Listen
 \usepackage{enumitem}
 
 %% SI-Einheiten
 \usepackage{siunitx}
+
+% \usepackage{float}
+% \floatstyle{komabelow} % KOMA-Script definiert zwei eigene Stile für das float-Paket
+% \restylefloat{table}
+% \restylefloat{figure}
+
+% \usepackage{floatrow}
+% \floatsetup{style=plain}
+
 
 %% Floatende Grafiken etc erst nach ihrer ersten Referenzierung im Text anzeigen, siehe auch
 %% http://stackoverflow.com/questions/547508/in-latex-is-there-a-way-to-put-a-float-automatically-after-where-it-is-first-re

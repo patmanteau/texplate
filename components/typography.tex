@@ -75,6 +75,12 @@
 \usepackage[german]{selnolig} % load selnolig w/o a language option
 \nolig{Th}{T|h} % disable "Th" ligature globally
 
+%% Aufrechte Klammern in kursivem Text
+% \usepackage[biblatex=true]{embrac}
+% \providecommand\textsi[1]{#1} % s. https://www.mail-archive.com/lyx-users@lists.lyx.org/msg110332.html
+% % Einstellungen für Skolar
+% \AddEmph{[}{]}[.04em,0.8em]
+
 %% ----------------------------------------------------------------------------
 %%
 %% Seite
@@ -83,44 +89,107 @@
 
 %% Seitenzahl
 \addtokomafont{pagenumber}{%
-    \addfontfeatures{Numbers={Lining}}\sffamily\bfseries}
+    \addfontfeatures{Numbers={Lining}}\rmfamily\mdseries}
 
 %% ----------------------------------------------------------------------------
-%%
 %% Überschriften
-%%
 %% ----------------------------------------------------------------------------
 
-% %% Auszeichnungen
-% \addtokomafont{section}{%
-%     %%\color{darkgray}\sffamily\bfseries\Large%
-%     %\lsstyle\color{darkgray}\sffamily\bfseries\uppercase}
-%     %\rmfamily\mdseries\upshape\lsstyle}
-%     \addfontfeatures{Numbers={Uppercase}}\rmfamily\mdseries\upshape}
-% \addtokomafont{subsection}{%
-%     %\color{darkgray}\sffamily\bfseries\scshape}
-%     \rmfamily\mdseries\scshape}
-% \addtokomafont{subsubsection}{%
-% %    \color{darkgray}\sffamily\bfseries%
-%     \rmfamily\mdseries\itshape}
-% %\addtokomafont{disposition}{%
-% %    \color{darkgray}}
+%%  Abschnittsnummerierung in den linken Rand ausrücken.
+%%  Komascript definiert zur Ausgabe der Nummern pro
+%%  Abschnittsart NAME den Befehl \NAMEformat, der hier
+%%  umdefiniert wird. \theNAME gibt die Nummer selber aus,
+%%  \autodot fügt je nach Konfiguration einen Punkt an.
+%%  s. dazu auch scrguide Kap. 21
+% \renewcommand*{\sectionformat}{%
+%     \makebox[0pt][r]{\rmfamily\mdseries\upshape\thesection\autodot\enskip}}
+% \renewcommand*{\subsectionformat}{%
+%     \makebox[0pt][r]{\rmfamily\mdseries\upshape\thesubsection\autodot\enskip}}
+% \renewcommand*{\subsubsectionformat}{%
+%     \makebox[0pt][r]{\rmfamily\mdseries\itshape\thesubsubsection\autodot\enskip}}
+% \renewcommand*{\paragraphformat}{%
+%     \makebox[0pt][r]{\theparagraph\autodot\enskip}}
+% \renewcommand*{\paragraphformat}{%
+%     \makebox[0pt][r]{\thesubparagraph\autodot\enskip}}
 
-% %% Abstände um Überschriften ändern
-% %% s. http://texwelt.de/wissen/fragen/10289/wie-andere-ich-die-abstande-uberunter-section-subsection-subsubsection
-% %\RedeclareSectionCommand[%
-%   %beforeskip=-1em,%
-%   %afterskip=1sp]{section}
-% %\RedeclareSectionCommand[%
-%   %beforeskip=-1em,%
-%   %afterskip=1sp]{subsection}
-% %\RedeclareSectionCommand[%
-%   %beforeskip=-1em,%
-%   %afterskip=1sp]{subsubsection}
+\renewcommand*{\chapterformat}{%
+    \makebox[1cm][l]{\rmfamily\bfseries\Large\thechapter\autodot\enskip}}
+\renewcommand*{\sectionformat}{%
+    \makebox[1cm][l]{\rmfamily\bfseries\large\thesection\autodot\enskip}}
+\renewcommand*{\subsectionformat}{%
+    \makebox[1cm][l]{\rmfamily\bfseries\thesubsection\autodot\enskip}}
+\renewcommand*{\subsubsectionformat}{%
+    \makebox[1cm][l]{\rmfamily\bfseries\thesubsubsection\autodot\enskip}}
+
+%% Überschrifttext
+\addtokomafont{chapter}{%
+    \rmfamily\bfseries\Large}
+\addtokomafont{section}{%
+    \rmfamily\bfseries\large}
+\addtokomafont{subsection}{%
+    \rmfamily\bfseries}
+\addtokomafont{subsubsection}{%
+    \rmfamily\bfseries}
+%\addtokomafont{disposition}{%
+%    \color{darkgray}}
+
+%% Abstände um Überschriften ändern
+%% s. http://texwelt.de/wissen/fragen/10289/wie-andere-ich-die-abstande-uberunter-section-subsection-subsubsection
+%\RedeclareSectionCommand[%
+  %beforeskip=-1em,%
+  %afterskip=1sp]{section}
+%\RedeclareSectionCommand[%
+  %beforeskip=-1em,%
+  %afterskip=1sp]{subsection}
+%\RedeclareSectionCommand[%
+  %beforeskip=-1em,%
+  %afterskip=1sp]{subsubsection}
+
 % \RedeclareSectionCommands[%
 %   beforeskip=-1\baselineskip,%
 %   afterskip=1sp%
-% ]{section,subsection,subsubsection}
+% ]{chapter,section,subsection,subsubsection}
+\RedeclareSectionCommands[%
+  beforeskip=-1\baselineskip,%
+  afterskip=1sp%
+]{chapter,section,subsection}
+\RedeclareSectionCommand[%
+  beforeskip=-1em,%
+  afterskip=-0.5em%
+]{subsubsection}
+
+%% ----------------------------------------------------------------------------
+%%
+%% Inhaltsverzeichnis
+%%
+%% ----------------------------------------------------------------------------
+% \setuptoc{toc}{
+%     noindent,
+%     numberline
+% }
+
+\DeclareTOCStyleEntries[
+    entrynumberformat   = {\normalfont\normalsize},
+    % pagenumberformat    = {~—~\normalfont\normalsize},
+    pagenumberformat    = {\normalfont\normalsize},
+    raggedentrytext     = {true},
+    % beforeskip          = {1sp},
+    % numwidth            = {3em},
+    % linefill            = {}
+    linefill            = {\TOCLineLeaderFill[ ]}
+]{tocline}{chapter, section, subsection, subsubsection}
+
+\DeclareTOCStyleEntry[
+    entryformat         = {\bfseries\normalsize},
+    pagenumberformat    = {\bfseries\normalsize},
+    % beforeskip          = {1em plus 1pt},
+    % linefill            = {}
+    linefill            = {\TOCLineLeaderFill[.]}
+]{tocline}{chapter}
+
+\DeclareTOCStyleEntries[
+    entryformat         = {\normalfont\normalsize}
+]{tocline}{section, subsection, subsubsection}
 
 %% ----------------------------------------------------------------------------
 %%
@@ -128,27 +197,45 @@
 %%
 %% ----------------------------------------------------------------------------
 
-%% Schriftart der Fußnotenmarke
-\addtokomafont{footnotelabel}{%
-    \sffamily\bfseries}
+% %% Ziffern linksbündig, Einzug gleich Markenbreite
+% \deffootnote[1.5em]{1.5em}{1em}{%
+%     \makebox[1.5em][l]{\thefootnotemark\ }}
 
-%% Ziffern fett, Normalschrift, linksbündig, Text darunter ausgerichtet
-\deffootnote{1em}{1em}{%
-  \makebox[1em][l]{\thefootnotemark}%
-}
+%% Ziffern linksbündig, kein Einzug
+\deffootnote[1.5em]{1sp}{1em}{%
+    \makebox[1.5em][l]{\thefootnotemark\ }}
+
+%% Schriftart der Fußnotenmarkierung im Text
+\setkomafont{footnotereference}{%
+    \addfontfeatures{Numbers={Uppercase,Proportional}}}
+
+%% Schriftart der Fußnotenmarke
+\setkomafont{footnotelabel}{%
+    \rmfamily\bfseries\addfontfeatures{Numbers={Uppercase,Proportional}}}
 
 %% ----------------------------------------------------------------------------
 %%
 %% Definiert \textuppercase - Text in GROẞBUCHSTABEN mit Tracking
 %%
 %% ----------------------------------------------------------------------------
-\makeatletter
 \newcommand{\textuppercase}[1]{%
-  {%
+{%
     \addfontfeatures{Numbers={Uppercase,Proportional}}%
     \microtypecontext{tracking=allcaps}%
     \lsstyle\MakeUppercase{#1}}}%
-\makeatother
+% \makeatletter
+%     \renewcommand{\sectionlinesformat}[4]{%
+%     \Ifstr{#1}{section}{%
+%         \@hangfrom{\hskip #2#3}{\textuppercase{#4}}% War einen ganzen Tag Fehlersuche wert: so zerschießt es einem die Hyperrefs auf unnummerierte Sections...
+%     }{%
+%         \@hangfrom{\hskip #2#3}{#4}%
+%     }%
+% }
+% \makeatother
+% \makeatletter
+% \renewcommand{\sectionlinesformat}[4]{%
+%     \@hangfrom{\hskip #2#3}{#4}}
+% \makeatother
 
 %% ----------------------------------------------------------------------------
 %%
@@ -157,4 +244,13 @@
 %% ----------------------------------------------------------------------------
 
 %% Familienname in Kapitälchen
-% \renewcommand{\mkbibnamefamily}[1]{\textsc{#1}}
+\renewcommand{\mkbibnamefamily}[1]{\textsc{#1}}
+
+%% Raum zwischen Einträgen, kein Einzug
+\setlength\bibitemsep{0.4\baselineskip}
+\setlength\bibhang{1sp}
+
+%% DOI in Dokumentschrift
+\DeclareFieldFormat{doi}{%
+    \mkbibacro{DOI}\addcolon\space \ifhyperref {\href{https://doi.org/#1}{\normalfont #1}} {\normalfont #1}}
+

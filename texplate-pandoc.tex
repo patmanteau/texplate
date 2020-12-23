@@ -17,7 +17,7 @@ $endfor$
 %% Inhaltsverzeichnis sowie Abkürzungs-, Abbildungs-, Tabellen- und Quellcodeverzeichnis ausgeben (mit einfachem Zeilenabstand)
 \begin{singlespace}
     % Satzspiegel neuberechnen
-    \nottoggle{TG_use_geometry}{\recalctypearea}
+    \nottoggle{TG_use_geometry}{\recalctypearea}{}
     
     
     %% Titelseite definieren und ausgeben
@@ -30,22 +30,32 @@ $endfor$
     \microtypesetup{protrusion=false} % Kein optischer Randausgleich für Verzeichnisse
     \tableofcontents
 
-    \clearpage
+    \newpage
     %% Abkürzungsverzeichnis ausgeben
-    \printglossaries
-    \clearpage
+    \setcounter{table}{599}
+    \printglossary[type=\glsxtrabbrvtype]
+    % \printglossaries
+    %% Fix für fehlerhafte Tabellennummerierung durch glossaries-Styles,
+    %% die longtables verwenden. Auf jeden Fall im fertigen Dokument checken!
+    \setcounter{table}{0}
+    \newpage
 
     %% Abbildungsverzeichnis ausgeben
     \listoffigures
-    \clearpage
+    \newpage
 
     %% Tabellenverzeichnis ausgeben
     \listoftables
-    \clearpage
+    \newpage
 
     % Listingverzeichnis ausgeben
-    \listoflistings
-    \clearpage
+    % \listoflistings
+    % \newpage
+
+    % \setcounter{table}{599}
+    % \printglossary[type=\glsdefaulttype]
+    % \setcounter{table}{0}
+    % \newpage
 
     \microtypesetup{protrusion=true} % optischen Randausgleich wieder anwerfen
 
@@ -53,44 +63,46 @@ $endfor$
 
 % \begin{onehalfspace}
     % Satzspiegel neuberechnen
-    \nottoggle{TG_use_geometry}{\recalctypearea}
+    \nottoggle{TG_use_geometry}{\recalctypearea}{}
 
     %% neue Seite,... (s. http://texwelt.de/wissen/fragen/18/was-ist-der-unterschied-zwischen-newpage-pagebreak-und-clearpage)
-    \clearpage
+    \newpage
     %% arabische Ziffern,...
     \pagenumbering{arabic}
 
     %% ogogogogogogogogogogo!
     $body$
-    
-    %% Seitenumbruch
+
+    %% Seitenumbruch, vorher verbleibende Flaots ausgeben
     \clearpage
 % \end{onehalfspace}
 
 %% Für das Literaturverzeichnis wieder einfacher Zeilenabstand
 \begin{singlespace}
     % Satzspiegel neuberechnen
-    \nottoggle{TG_use_geometry}{\recalctypearea}
+    \nottoggle{TG_use_geometry}{\recalctypearea}{}
 
     %% Hack zur Vermeidung von overfull hboxes im Litverzeichnis
     \emergencystretch=1em
     %% Literaturverzeichnis ausgeben
     \printbibliography[heading=bibintoc]
     %% neue Seite
-    \clearpage
+    \newpage
 \end{singlespace}
 
 \newpage
 % Satzspiegel neuberechnen
-\nottoggle{TG_use_geometry}{\recalctypearea}
-\pagenumbering{gobble}
-\section*{Ehrenwörtliche Erklärung}
-% \addcontentsline{toc}{section}{Erklärung}%\addtocontents{toc}{\vfill}
+\nottoggle{TG_use_geometry}{\recalctypearea}{}
+\pagestyle{empty}
+\addchap*{Ehrenwörtliche Erklärung}
 Hiermit versichere ich, dass die vorliegende Arbeit von mir selbstständig und ohne unerlaubte Hilfe angefertigt worden ist, insbesondere dass ich alle Stellen, die wörtlich oder annähernd wörtlich aus Veröffentlichungen entnommen sind, durch Zitate als solche gekennzeichnet habe. Ich versichere auch, dass die von mir eingereichte schriftliche Version mit der digitalen Version übereinstimmt. Weiterhin erkläre ich, dass die Arbeit in gleicher oder ähnlicher Form noch keiner Prüfungsbehörde/Prüfungsstelle vorgelegen hat. Ich erkläre mich damit einverstanden, dass die Arbeit der Öffentlichkeit zugänglich gemacht wird. Ich erkläre mich damit einverstanden, dass die Digitalversion dieser Arbeit zwecks Plagiatsprüfung auf die Server externer Anbieter hochgeladen werden darf. Die Plagiatsprüfung stellt keine Zurverfügungstellung für die Öffentlichkeit dar.
 \\
 \\
-\noindent Bonn, den \today
+\noindent \texplatelocation, den \today
 \begin{flushright}
+\includegraphics[scale=0.35]{assets/unterschrift.png}\hspace*{+21mm}
+
+\vspace{-2mm}
 $$\overline{~~~~~~~~~~~~~~~~~~~~~~~~~\mbox{(\texplateauthor)}~~~~~~~~~~~~~~~~~~~~~~~~~}$$
 \end{flushright}
 

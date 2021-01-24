@@ -84,6 +84,11 @@
 \newtoggle{TG_use_geometry}
 \settoggle{TG_use_geometry}{true}
 
+\newtoggle{use_pandoc}
+\settoggle{use_pandoc}{false}
+
+\IfFileExists{texplate-config.tex}{\input{texplate-config.tex}}{\input{texplate-config-default.tex}}
+
 \iftoggle{final_version}{%
     \KOMAoption{draft}{false}%
     \PassOptionsToPackage{final}{bookmark}%
